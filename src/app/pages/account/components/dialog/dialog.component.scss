@@ -1,0 +1,40 @@
+@import '~@angular/material/theming';
+@import '../../../../../styles-variables';
+
+.mat-dialog-action {
+  display: flex;
+  justify-content: center;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+p,
+div {
+  text-align: center;
+}
+.active {
+  background: mat-color($success-colors);
+}
+.images {
+  display: flex;
+  flex-direction: column;
+}
+.bank,
+.card {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+.bank p,
+.card p {
+  margin: 0;
+}
+img {
+  width: 50px;
+  height: 50px;
+}

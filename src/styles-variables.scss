@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+
+$toolbar-breakpoint: 600px;
+
+$fa-font-path: '../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts';
+
+$link-hover-decoration: none;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$success-colors: mat-palette($mat-green, 400);
+$warning-colors: mat-palette($mat-amber, 400);
+
+$app-primary: mat-palette($mat-grey);
+$app-accent: mat-palette($mat-light-blue);
+$app-warn: mat-palette($mat-pink);

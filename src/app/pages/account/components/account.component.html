@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="accounts" *ngFor="let account of accounts">
+    <div class="personal-information" >
+      <h2 class="title">{{ 'anms.account.information.title' | translate }}</h2>
+      
+      <div class="info" *ngFor="let entry of labels">
+        <label for="{{entry.key}}" class="label col-sm-2">{{ entry.value | translate }}:</label>
+        <p *ngIf="!entry.isEditable" class="value col-sm-4">{{account[entry.key]}}</p>
+        <input *ngIf="entry.isEditable" type="text" class="edit-input" [(ngModel)]="account[entry.key]">
+        <p class="value col-sm-4">
+          <a class="action" (click)="entry.isEditable = !entry.isEditable">
+            {{entry.isEditable ? "Save" : "Edit"}}</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="payment-methods">
+        <h2 class="title">{{ 'anms.account.payment.method' | translate }}</h2>
+        <div class="info">
+          <label for="card" class="label col-sm-2">{{ 'anms.account.payment.cards' | translate }}</label>
+          <img src="assets/visa.png" alt="Visa card">
+          <p name="card" class="value col-sm-4">{{account.cardInfo}}
+            <a class="action" (click)="openDialog('card')">{{ 'anms.account.payment.add' | translate }}</a>
+          </p>
+          <p *ngIf="selectedMethod=='card'">{{ 'anms.account.payment.default' | translate }}</p>
+        </div>  
+        <div class="info">
+          <label for="bank" class="label col-sm-2">{{ 'anms.account.payment.bank' | translate }}</label>
+          <img src="assets/bank.png" alt="Bank">
+          <p name="bank" class="value col-sm-4">{{account.bankInfo}}
+            <a class="action" (click)="openDialog('bank')">{{ 'anms.account.payment.add' | translate }}</a></p>
+          <p *ngIf="selectedMethod=='bank'">{{ 'anms.account.payment.default' | translate }}</p>
+        </div>
+        <div class="default">
+          <p><a class="action" (click)="openDialog('change_default')">{{ 'anms.account.payment.change' | translate }}</a></p>
+        </div>
+    </div>
+
+    <div class="notification-wrapper">
+        <h2 class="title">{{ 'anms.account.notification.title' | translate }}</h2>
+        <div class="info">
+          <div class="notifications">
+            <mat-checkbox
+                *ngFor="let notification of notifications"
+                class="notification col"
+                [checked]="account[notification.key]">{{ notification.value | translate }}
+              </mat-checkbox>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

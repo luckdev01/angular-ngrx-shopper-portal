@@ -1,0 +1,49 @@
+<div class="table-container">
+  <div class="table-wrapper mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container *ngFor="let column of headerItems" matColumnDef="{{column}}">
+        <mat-header-cell *matHeaderCellDef> {{ 'anms.purchases.table.'+column | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+      </ng-container>
+      
+      <!-- Expanded Content Column - The detail row is made up of this one column -->
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let detail" class="matcell">
+          <div class="first-payment"> 
+            <mat-checkbox class="col" [ngClass]="routeAnimationsElements"></mat-checkbox>
+            <p>{{ 'anms.purchases.table.firstPayment' | translate }}</p>
+            <p class="pay"><a class="action" (click)="payNow()">{{ 'anms.purchases.table.payNow' | translate }}</a></p>
+            <p class="pay"><a class="action" (click)="reSchedule()">{{ 'anms.purchases.table.reschedule' | translate }}</a></p>
+          </div>
+          <div class="second-payment"> 
+            <mat-checkbox class="col" [ngClass]="routeAnimationsElements"></mat-checkbox>
+            <p>{{ 'anms.purchases.table.secondPayment' | translate }}</p>
+            <p class="pay"><a class="action" (click)="payNow()">{{ 'anms.purchases.table.payNow' | translate }}</a></p>
+            <p class="pay"><a class="action" (click)="reSchedule()">{{ 'anms.purchases.table.reschedule' | translate }}</a></p>
+          </div>
+          <div class="third-payment"> 
+            <mat-checkbox class="col" [ngClass]="routeAnimationsElements"></mat-checkbox>
+            <p>{{ 'anms.purchases.table.thirdPayment' | translate }}</p>
+            <p class="pay"><a class="action" (click)="payNow()">{{ 'anms.purchases.table.payNow' | translate }}</a></p>
+            <p class="pay"><a class="action" (click)="reSchedule()">{{ 'anms.purchases.table.reschedule' | translate }}</a></p>
+          </div>
+          <div class="other">
+            <p class="pay"><a class="action" (click)="payNow()">{{ 'anms.purchases.table.payNow' | translate }}</a></p>
+            <p class="pay"><a class="action" (click)="reSchedule()">{{ 'anms.purchases.table.remaining' | translate }}</a></p>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="headerItems"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: headerItems;"
+              matRipple 
+              class="element-row" 
+              [class.expanded]="expandedElement == row"
+              (click)="expandedElement = row"></mat-row>
+      <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+              [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+              style="overflow: hidden"> 
+      </mat-row>
+    </mat-table>
+  </div>
+</div>

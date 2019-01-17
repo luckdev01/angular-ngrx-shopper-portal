@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "date": "Jan 23 2018",
+    "store": "B&H Photo",
+    "orderNumber": "0987535",
+    "orderAmount": "$200",
+    "amountOwed": "$50",
+    "status": "Active",
+    "more": "-"
+  },
+  {
+    "id": 2,
+    "date": "Jan 23 2018",
+    "store": "B&H Photo",
+    "orderNumber": "0987535",
+    "orderAmount": "$200",
+    "amountOwed": "$50",
+    "status": "Active",
+    "more": "-"
+  },
+  {
+    "id": 3,
+    "date": "Jan 23 2018",
+    "store": "B&H Photo",
+    "orderNumber": "0987535",
+    "orderAmount": "$200",
+    "amountOwed": "$50",
+    "status": "Active",
+    "more": "-"
+  }
+]

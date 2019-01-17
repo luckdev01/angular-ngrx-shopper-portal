@@ -1,0 +1,81 @@
+@import '../../../../styles-variables';
+
+.accounts {
+  .personal-information,
+  .payment-methods,
+  .notification-wrapper {
+    .title {
+      margin-top: 20px;
+    }
+
+    .default {
+      justify-content: center;
+      display: flex;
+    }
+
+    .info {
+      display: flex;
+      justify-content: flex-start;
+
+      .label {
+        text-align: left;
+        padding: 0;
+      }
+
+      .value {
+        .action {
+          float: right;
+          cursor: pointer;
+          user-select: none;
+        }
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .info-first,
+      .info-second {
+        display: inline-grid;
+      }
+    }
+  }
+
+  .notifications {
+    display: flex;
+    flex-wrap: wrap;
+
+    .notification {
+      flex: 1 0 50%;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .accounts {
+    width: 100%;
+
+    .notifications {
+      display: inline-block !important;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      .info {
+        width: 100%;
+        display: inline-block !important;
+      }
+    }
+
+    .payment-methods {
+      margin-bottom: 30px;
+      .info {
+        display: inline-block;
+
+        label {
+          width: 100%;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

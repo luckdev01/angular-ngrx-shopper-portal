@@ -1,0 +1,19 @@
+[
+  {
+    "id": 0,
+    "name": "AAAA",
+    "address": "ABCD1234",
+    "phone": 123,
+    "email": "example@gmail.com",
+    "cardInfo": "Visa...5486",
+    "bankInfo": "Chase Account4587",
+    "paymentReminder": true,
+    "paymentCompleted": true,
+    "paymentFailed": true,
+    "paymentRescheduled": true,
+    "newPurchase": false,
+    "orderDenied": false,
+    "orderCompleted": true,
+    "accountChanges": false
+  }
+]

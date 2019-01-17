@@ -1,0 +1,34 @@
+[
+  {
+    "key": "paymentReminder",
+    "value": "anms.account.notification.payment.Reminder"
+  },
+  {
+    "key": "newPurchase",
+    "value": "anms.account.notification.newPurchase"
+  },
+  {
+    "key": "paymentCompleted",
+    "value": "anms.account.notification.payment.Completed"
+  },
+  {
+    "key": "orderDenied",
+    "value": "anms.account.notification.orderDenied"
+  },
+  {
+    "key": "paymentFailed",
+    "value": "anms.account.notification.payment.Failed"
+  },
+  {
+    "key": "orderCompleted",
+    "value": "anms.account.notification.orderCompleted"
+  },
+  {
+    "key": "paymentRescheduled",
+    "value": "anms.account.notification.payment.Rescheduled"
+  },
+  {
+    "key": "accountChanges",
+    "value": "anms.account.notification.accountChanges"
+  }
+]

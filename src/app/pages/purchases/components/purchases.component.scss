@@ -1,0 +1,11 @@
+@import '../../../../styles-variables';
+
+.filter-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .filter-option {
+    margin-right: 20px;
+  }
+}

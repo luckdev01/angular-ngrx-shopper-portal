@@ -1,0 +1,18 @@
+[
+  {
+    "key": "name",
+    "value": "anms.account.information.name"
+  },
+  {
+    "key": "address",
+    "value": "anms.account.information.address"
+  },
+  {
+    "key": "phone",
+    "value": "anms.account.information.mobilenumber"
+  },
+  {
+    "key": "email",
+    "value": "anms.account.information.email"
+  }
+]

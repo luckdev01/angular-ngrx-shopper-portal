@@ -1,0 +1,55 @@
+<div *ngIf="data.type=='bank'">
+  <p mat-dialog-title>Add a Bank Account</p>
+  <div mat-dialog-content>
+    <textarea rows="4" cols="50"></textarea>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="addPaymentMethod('bank')">OK</button>
+  </div>
+</div>
+
+<div *ngIf="data.type=='card'">
+  <p mat-dialog-title>Add a Payment Card</p>
+  <div mat-dialog-content class="info">
+    <input type="text" name="card" placeholder="Card"/>
+    <input type="text" name="cardnumber" placeholder="Card Number"/>
+    <span class="date-cvv">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <input type="text" name="zipcode" placeholder="CVV"/>
+    </span>
+    <input type="text" name="zipcode" placeholder="Zip Code"/>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="addPaymentMethod('card')">Add Card</button>
+  </div>
+</div>
+
+<div *ngIf="data.type=='change_default'">
+  <p mat-dialog-title>Select Default Payment Method</p>
+  <div mat-dialog-content class="images" *ngFor="let account of data.accounts">
+      <div 
+      [ngClass]="{'active': data.selectedType === paymentmethods.CARD}" 
+      class="card" 
+      (click)="data.selectedType = paymentmethods.CARD">
+        <img src="../../../assets/visa.png" alt="Visa card">
+        <p>{{account.cardInfo}}</p>
+      </div>
+      <div 
+      [ngClass]="{'active': data.selectedType === paymentmethods.BANK}" 
+      class="bank" 
+      (click)="data.selectedType = paymentmethods.BANK">
+        <img src="../../../assets/bank.png" alt="bank">
+        <p>{{account.bankInfo}}</p>
+      </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.selectedType">OK</button>
+  </div>
+</div>
