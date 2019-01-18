@@ -59,6 +59,7 @@ export class AccountComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       this.store.dispatch(new ActionAccountUpdateSelectedPaymentMethod(result));
     });
   }

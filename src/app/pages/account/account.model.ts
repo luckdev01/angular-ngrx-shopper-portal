@@ -18,6 +18,15 @@ export interface Account {
   accountChanges: boolean;
 }
 
+export interface PaymentCard {
+  card: string;
+  cardNumber: string;
+  month: string;
+  year: string;
+  cvv: string;
+  zipcode: string;
+}
+
 export interface Label {
   key: string;
   value: string;

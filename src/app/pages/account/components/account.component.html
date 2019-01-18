@@ -2,11 +2,11 @@
   <div class="accounts" *ngFor="let account of accounts">
     <div class="personal-information" >
       <h2 class="title">{{ 'anms.account.information.title' | translate }}</h2>
-      
+
       <div class="info" *ngFor="let entry of labels">
         <label for="{{entry.key}}" class="label col-sm-2">{{ entry.value | translate }}:</label>
-        <p *ngIf="!entry.isEditable" class="value col-sm-4">{{account[entry.key]}}</p>
-        <input *ngIf="entry.isEditable" type="text" class="edit-input" [(ngModel)]="account[entry.key]">
+        <p *ngIf="!entry.isEditable" class="value col-sm-4">{{account.personalInfo[entry.key]}}</p>
+        <input *ngIf="entry.isEditable" type="text" class="edit-input" [(ngModel)]="account.personalInfo[entry.key]">
         <p class="value col-sm-4">
           <a class="action" (click)="entry.isEditable = !entry.isEditable">
             {{entry.isEditable ? "Save" : "Edit"}}</a>
@@ -19,15 +19,15 @@
         <div class="info">
           <label for="card" class="label col-sm-2">{{ 'anms.account.payment.cards' | translate }}</label>
           <img src="assets/visa.png" alt="Visa card">
-          <p name="card" class="value col-sm-4">{{account.cardInfo}}
+          <p name="card" class="value col-sm-4">{{account.paymentMethodInfo.cardInfo}}
             <a class="action" (click)="openDialog('card')">{{ 'anms.account.payment.add' | translate }}</a>
           </p>
           <p *ngIf="selectedMethod=='card'">{{ 'anms.account.payment.default' | translate }}</p>
-        </div>  
+        </div>
         <div class="info">
           <label for="bank" class="label col-sm-2">{{ 'anms.account.payment.bank' | translate }}</label>
           <img src="assets/bank.png" alt="Bank">
-          <p name="bank" class="value col-sm-4">{{account.bankInfo}}
+          <p name="bank" class="value col-sm-4">{{account.paymentMethodInfo.bankInfo}}
             <a class="action" (click)="openDialog('bank')">{{ 'anms.account.payment.add' | translate }}</a></p>
           <p *ngIf="selectedMethod=='bank'">{{ 'anms.account.payment.default' | translate }}</p>
         </div>
@@ -43,7 +43,7 @@
             <mat-checkbox
                 *ngFor="let notification of notifications"
                 class="notification col"
-                [checked]="account[notification.key]">{{ notification.value | translate }}
+                [checked]="account.notificationInfo[notification.key]">{{ notification.value | translate }}
               </mat-checkbox>
           </div>
         </div>
