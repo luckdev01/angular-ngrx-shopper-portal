@@ -12,14 +12,14 @@
 <div *ngIf="data.type=='card'">
   <p mat-dialog-title>Add a Payment Card</p>
   <div mat-dialog-content class="info">
-    <input type="text" name="card" placeholder="Card"/>
-    <input type="text" name="cardnumber" placeholder="Card Number"/>
+    <input matInput name="card" placeholder="{{'anms.account.dialog.card' | translate }}"/>
+    <input matInput name="cardnumber" placeholder="{{'anms.account.dialog.cardnumber' | translate }}"/>
     <span class="date-cvv">
-      <input type="text" name="month" placeholder="MM"/>
-      <input type="text" name="year" placeholder="YR"/>
-      <input type="text" name="cvv" placeholder="CVV"/>
+      <input matInput name="month" placeholder="{{'anms.account.dialog.month' | translate }}"/>
+      <input matInput name="year" placeholder="{{'anms.account.dialog.year' | translate }}"/>
+      <input matInput name="cvv" placeholder="{{'anms.account.dialog.cvv' | translate }}"/>
     </span>
-    <input type="text" name="zipcode" placeholder="Zip Code"/>
+    <input matInput name="zipcode" placeholder="{{'anms.account.dialog.zipcode' | translate }}"/>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>

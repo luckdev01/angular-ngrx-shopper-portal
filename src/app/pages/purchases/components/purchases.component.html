@@ -1,10 +1,10 @@
 <div class="purchase-wrapper">
   <div class="filter-wrapper">
     <mat-form-field class="filter-option">
-      <input matInput placeholder="Search">
+      <input matInput placeholder="{{'anms.purchases.search' | translate }}">
     </mat-form-field>
     <mat-form-field class="filter-option">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <input matInput [matDatepicker]="picker" placeholder="{{'anms.purchases.choose.date' | translate }}">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
