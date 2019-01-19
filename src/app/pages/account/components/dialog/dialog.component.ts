@@ -5,7 +5,7 @@ import {
   Inject
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PaymentMethods } from './../../account.model';
+import { PaymentMethods, PaymentDialog } from './../../account.model';
 
 export interface DialogData {
   selectedType: string;
@@ -18,7 +18,8 @@ export interface DialogData {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogComponent implements OnInit {
-  paymentmethods: any;
+  paymentMethods: any;
+  paymentDialog: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -26,7 +27,8 @@ export class DialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.paymentmethods = PaymentMethods;
+    this.paymentMethods = PaymentMethods;
+    this.paymentDialog = PaymentDialog;
   }
 
   onNoClick(): void {

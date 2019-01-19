@@ -19,15 +19,13 @@ export class PurchaseEffects {
   ) {}
 
   @Effect()
-  getPurchases = ({ debounce = 500, scheduler = asyncScheduler } = {}) =>
-    this.actions$.pipe(
-      ofType<ActionPurchaseGet>(PurchaseActionTypes.GET),
-      debounceTime(debounce, scheduler),
-      switchMap((action: ActionPurchaseGet) =>
-        this.service.getAll().pipe(
-          map(purchases => new ActionPurchaseGetSuccess({ purchases })),
-          catchError(error => of(new ActionPurchaseGetError({ error })))
-        )
+  getPurchases = this.actions$.pipe(
+    ofType<ActionPurchaseGet>(PurchaseActionTypes.GET),
+    switchMap((action: ActionPurchaseGet) =>
+      this.service.getAll().pipe(
+        map(purchases => new ActionPurchaseGetSuccess({ purchases })),
+        catchError(error => of(new ActionPurchaseGetError({ error })))
       )
-    );
+    )
+  );
 }

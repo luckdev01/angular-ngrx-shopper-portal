@@ -1,4 +1,4 @@
-<div *ngIf="data.type=='bank'">
+<div *ngIf="data.type==paymentDialog.BANK_DIALOG">
   <p mat-dialog-title>Add a Bank Account</p>
   <div mat-dialog-content>
     <textarea rows="4" cols="50"></textarea>
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div *ngIf="data.type=='card'">
+<div *ngIf="data.type==paymentDialog.CARD_DIALOG">
   <p mat-dialog-title>Add a Payment Card</p>
   <div mat-dialog-content class="info">
     <input matInput name="card" placeholder="{{'anms.account.dialog.card' | translate }}"/>
@@ -27,20 +27,20 @@
   </div>
 </div>
 
-<div *ngIf="data.type=='change_default'">
+<div *ngIf="data.type==paymentDialog.CHANGE_DEFUALT_DIALOG">
   <p mat-dialog-title>Select Default Payment Method</p>
   <div mat-dialog-content class="images" *ngFor="let account of data.accounts">
       <div
-      [ngClass]="{'active': data.selectedType === paymentmethods.CARD}"
+      [ngClass]="{'active': data.selectedType === paymentMethods.CARD}"
       class="card"
-      (click)="data.selectedType = paymentmethods.CARD">
+      (click)="data.selectedType = paymentMethods.CARD">
         <img src="../../../assets/visa.png" alt="Visa card">
         <p>{{account.paymentMethodInfo.cardInfo}}</p>
       </div>
       <div
-      [ngClass]="{'active': data.selectedType === paymentmethods.BANK}"
+      [ngClass]="{'active': data.selectedType === paymentMethods.BANK}"
       class="bank"
-      (click)="data.selectedType = paymentmethods.BANK">
+      (click)="data.selectedType = paymentMethods.BANK">
         <img src="../../../assets/bank.png" alt="bank">
         <p>{{account.paymentMethodInfo.bankInfo}}</p>
       </div>

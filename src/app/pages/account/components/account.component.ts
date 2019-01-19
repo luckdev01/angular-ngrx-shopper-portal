@@ -11,7 +11,13 @@ import {
   ActionAccountGetNotifications,
   ActionAccountUpdateSelectedPaymentMethod
 } from '../account.actions';
-import { AccountState, Account, Label, Notification } from '../account.model';
+import {
+  AccountState,
+  Account,
+  Label,
+  Notification,
+  PaymentDialog
+} from '../account.model';
 
 import { State } from '../../pages.state';
 import { DialogComponent } from './dialog/dialog.component';
@@ -30,10 +36,13 @@ export class AccountComponent implements OnInit {
   accounts: Account[];
   labels: Label[];
   notifications: Notification[];
+  paymentDialog: any;
 
   constructor(public dialog: MatDialog, private store: Store<State>) {}
 
   ngOnInit() {
+    this.paymentDialog = PaymentDialog;
+
     this.store.dispatch(new ActionAccountGet());
     this.store.dispatch(new ActionAccountGetLabels());
     this.store.dispatch(new ActionAccountGetNotifications());

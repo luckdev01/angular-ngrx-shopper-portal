@@ -50,3 +50,9 @@ export enum PaymentMethods {
   BANK = 'bank',
   CARD = 'card'
 }
+
+export enum PaymentDialog {
+  CARD_DIALOG,
+  BANK_DIALOG,
+  CHANGE_DEFAULT_DIALOG
+}

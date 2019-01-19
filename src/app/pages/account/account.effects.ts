@@ -25,17 +25,15 @@ export class AccountEffects {
   ) {}
 
   @Effect()
-  getAccounts = ({ debounce = 500, scheduler = asyncScheduler } = {}) =>
-    this.actions$.pipe(
-      ofType<ActionAccountGet>(AccountActionTypes.GET),
-      debounceTime(debounce, scheduler),
-      switchMap((action: ActionAccountGet) =>
-        this.service.getAll().pipe(
-          map(accounts => new ActionAccountGetSuccess({ accounts })),
-          catchError(error => of(new ActionAccountGetError({ error })))
-        )
+  getAccounts = this.actions$.pipe(
+    ofType<ActionAccountGet>(AccountActionTypes.GET),
+    switchMap((action: ActionAccountGet) =>
+      this.service.getAll().pipe(
+        map(accounts => new ActionAccountGetSuccess({ accounts })),
+        catchError(error => of(new ActionAccountGetError({ error })))
       )
-    );
+    )
+  );
 
   @Effect()
   getLabels = this.actions$.pipe(
