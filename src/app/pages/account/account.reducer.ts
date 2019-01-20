@@ -4,7 +4,7 @@ import { AccountActions, AccountActionTypes } from './account.actions';
 export const initialState: AccountState = {
   loading: false,
   accounts: [],
-  selectedMethod: 'card'
+  selectedMethod: ''
 };
 
 export function accountReducer(
@@ -71,6 +71,25 @@ export function accountReducer(
       return {
         ...state,
         notifications: null,
+        error: action.payload.error
+      };
+
+    case AccountActionTypes.GET_PAYMENT_METHOD:
+      return {
+        ...state,
+        selectedMethod: null
+      };
+
+    case AccountActionTypes.GET_PAYMENT_METHOD_SUCCESS:
+      return {
+        ...state,
+        selectedMethod: action.payload
+      };
+
+    case AccountActionTypes.GET_PAYMENT_METHOD_ERROR:
+      return {
+        ...state,
+        selectedMethod: null,
         error: action.payload.error
       };
 

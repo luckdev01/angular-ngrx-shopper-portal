@@ -9,7 +9,8 @@ import {
   ActionAccountGet,
   ActionAccountGetLabels,
   ActionAccountGetNotifications,
-  ActionAccountUpdateSelectedPaymentMethod
+  ActionAccountUpdateSelectedPaymentMethod,
+  ActionAccountGetPaymentMethod
 } from '../account.actions';
 import {
   AccountState,
@@ -46,6 +47,7 @@ export class AccountComponent implements OnInit {
     this.store.dispatch(new ActionAccountGet());
     this.store.dispatch(new ActionAccountGetLabels());
     this.store.dispatch(new ActionAccountGetNotifications());
+    this.store.dispatch(new ActionAccountGetPaymentMethod());
 
     this.accounts$ = this.store.pipe(select(selectAccounts));
     this.accounts$.pipe().subscribe(res => {

@@ -18,6 +18,10 @@ export interface Account {
   accountChanges: boolean;
 }
 
+export interface PaymentSetting {
+  paymentMethod: string;
+}
+
 export interface PaymentCard {
   card: string;
   cardNumber: string;
