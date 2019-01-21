@@ -5,7 +5,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="addPaymentMethod('bank')">OK</button>
+    <button mat-button (click)="addPaymentMethod(paymentMethods.BANK)">OK</button>
   </div>
 </div>
 
@@ -23,11 +23,11 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="addPaymentMethod('card')">Add Card</button>
+    <button mat-button (click)="addPaymentMethod(paymentMethods.BANK)">Add Card</button>
   </div>
 </div>
 
-<div *ngIf="data.type==paymentDialog.CHANGE_DEFUALT_DIALOG">
+<div *ngIf="data.type==paymentDialog.CHANGE_DEFAULT_DIALOG">
   <p mat-dialog-title>Select Default Payment Method</p>
   <div mat-dialog-content class="images" *ngFor="let account of data.accounts">
       <div
@@ -47,6 +47,6 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.selectedType">OK</button>
+    <button mat-button [mat-dialog-close]="{type:data.type, payload:data.selectedType}">OK</button>
   </div>
 </div>

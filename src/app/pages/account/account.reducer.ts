@@ -96,7 +96,18 @@ export function accountReducer(
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD:
       return {
         ...state,
+        selectedMethod: null
+      };
+    case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS:
+      return {
+        ...state,
         selectedMethod: action.payload
+      };
+
+    case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_ERROR:
+      return {
+        ...state,
+        error: action.payload.error
       };
 
     default:

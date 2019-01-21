@@ -9,7 +9,7 @@ import {
   ActionAccountGet,
   ActionAccountGetLabels,
   ActionAccountGetNotifications,
-  ActionAccountUpdateSelectedPaymentMethod,
+  ActionAccountUpdateSelectedPaymentMethodSuccess,
   ActionAccountGetPaymentMethod
 } from '../account.actions';
 import {
@@ -64,14 +64,22 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  openDialog(type): void {
+  openDialog(type: any): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: { type: type, accounts: this.accounts, labels: this.labels }
+      data: {
+        type: type,
+        accounts: this.accounts,
+        selectedType: this.selectedMethod
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.store.dispatch(new ActionAccountUpdateSelectedPaymentMethod(result));
+      if (result.type === this.paymentDialog.CHANGE_DEFAULT_DIALOG) {
+        this.store.dispatch(
+          new ActionAccountUpdateSelectedPaymentMethodSuccess(result.payload)
+        );
+      }
     });
   }
 }

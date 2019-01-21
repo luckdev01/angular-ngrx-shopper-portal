@@ -16,7 +16,9 @@ export enum AccountActionTypes {
   GET_PAYMENT_METHOD = '[Account] Get Payment Method',
   GET_PAYMENT_METHOD_SUCCESS = '[Account] Get Payment Method Success',
   GET_PAYMENT_METHOD_ERROR = '[Account] Get Payment Method Error',
-  UPDATE_SELECTED_PAYMENT_METHOD = '[Account] Update Selected Payment Method'
+  UPDATE_SELECTED_PAYMENT_METHOD = '[Account] Update Selected Payment Method',
+  UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS = '[Account] Update Selected Payment Method Success',
+  UPDATE_SELECTED_PAYMENT_METHOD_ERROR = '[Account] Update Selected Payment Method Error'
 }
 
 export class ActionAccountGet implements Action {
@@ -94,7 +96,19 @@ export class ActionAccountGetPaymentMethodError implements Action {
 export class ActionAccountUpdateSelectedPaymentMethod implements Action {
   readonly type = AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD;
 
+  constructor() {}
+}
+
+export class ActionAccountUpdateSelectedPaymentMethodSuccess implements Action {
+  readonly type = AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS;
+
   constructor(readonly payload: string) {}
+}
+
+export class ActionAccountUpdateSelectedPaymentMethodError implements Action {
+  readonly type = AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_ERROR;
+
+  constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
 
 export type AccountActions =
@@ -104,10 +118,12 @@ export type AccountActions =
   | ActionAccountGetLabels
   | ActionAccountGetLabelsSuccess
   | ActionAccountGetLabelsError
-  | ActionAccountUpdateSelectedPaymentMethod
   | ActionAccountGetNotifications
   | ActionAccountGetNotificationsSuccess
   | ActionAccountGetNotificationsError
   | ActionAccountGetPaymentMethod
   | ActionAccountGetPaymentMethodSuccess
-  | ActionAccountGetPaymentMethodError;
+  | ActionAccountGetPaymentMethodError
+  | ActionAccountUpdateSelectedPaymentMethod
+  | ActionAccountUpdateSelectedPaymentMethodSuccess
+  | ActionAccountUpdateSelectedPaymentMethodError;

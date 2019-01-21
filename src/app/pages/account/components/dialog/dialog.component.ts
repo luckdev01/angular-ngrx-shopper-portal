@@ -5,9 +5,11 @@ import {
   Inject
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PaymentMethods, PaymentDialog } from './../../account.model';
+import { PaymentMethods, PaymentDialog, Account } from './../../account.model';
 
 export interface DialogData {
+  type: string;
+  accounts?: Account[];
   selectedType: string;
 }
 
@@ -27,6 +29,7 @@ export class DialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.data);
     this.paymentMethods = PaymentMethods;
     this.paymentDialog = PaymentDialog;
   }
