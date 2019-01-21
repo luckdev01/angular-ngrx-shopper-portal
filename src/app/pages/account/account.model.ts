@@ -51,7 +51,7 @@ export interface AccountState {
 }
 
 export interface DialogParams {
-  type: PaymentDialog;
+  type: PaymentDialogType;
   account: Account;
   selectedType: string;
 }
@@ -61,8 +61,13 @@ export enum PaymentMethods {
   CARD = 'card'
 }
 
-export enum PaymentDialog {
+export enum PaymentDialogs {
   CARD_DIALOG = 'card_dialog',
   BANK_DIALOG = 'bank_dialog',
   CHANGE_DEFAULT_DIALOG = 'change_default_dialog'
 }
+
+export type PaymentDialogType =
+  | PaymentDialogs.CARD_DIALOG
+  | PaymentDialogs.BANK_DIALOG
+  | PaymentDialogs.CHANGE_DEFAULT_DIALOG;

@@ -12,7 +12,7 @@ import {
   Validators
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PaymentMethods, PaymentDialog, Account } from './../../account.model';
+import { PaymentMethods, PaymentDialogs, Account } from './../../account.model';
 
 export interface DialogData {
   type: string;
@@ -30,7 +30,7 @@ export class DialogComponent implements OnInit {
   cardForm: FormGroup;
   bankForm: FormGroup;
   paymentMethods: any;
-  paymentDialog: any;
+  paymentDialogs: any;
 
   constructor(
     private fb: FormBuilder,
@@ -52,6 +52,6 @@ export class DialogComponent implements OnInit {
     });
     console.log(this.data);
     this.paymentMethods = PaymentMethods;
-    this.paymentDialog = PaymentDialog;
+    this.paymentDialogs = PaymentDialogs;
   }
 }

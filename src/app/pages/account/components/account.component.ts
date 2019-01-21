@@ -17,7 +17,8 @@ import {
   Account,
   Label,
   Notification,
-  PaymentDialog,
+  PaymentDialogs,
+  PaymentDialogType,
   DialogParams
 } from '../account.model';
 
@@ -38,12 +39,12 @@ export class AccountComponent implements OnInit {
   accounts: Account[];
   labels: Label[];
   notifications: Notification[];
-  paymentDialog: any;
+  paymentDialogs: any;
 
   constructor(public dialog: MatDialog, private store: Store<State>) {}
 
   ngOnInit() {
-    this.paymentDialog = PaymentDialog;
+    this.paymentDialogs = PaymentDialogs;
 
     this.store.dispatch(new ActionAccountGet());
     this.store.dispatch(new ActionAccountGetLabels());
@@ -65,7 +66,7 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  openDialog(type: PaymentDialog): void {
+  openDialog(type: PaymentDialogType): void {
     const dialogParmas: DialogParams = {
       type: type,
       account: this.accounts[0],
@@ -77,7 +78,7 @@ export class AccountComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result.type === this.paymentDialog.CHANGE_DEFAULT_DIALOG) {
+      if (result.type === this.paymentDialogs.CHANGE_DEFAULT_DIALOG) {
         this.store.dispatch(
           new ActionAccountUpdateSelectedPaymentMethodSuccess(
             result.selectedType

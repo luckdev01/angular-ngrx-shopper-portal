@@ -1,4 +1,4 @@
-<div *ngIf="data.type==paymentDialog.BANK_DIALOG">
+<div *ngIf="data.type==paymentDialogs.BANK_DIALOG">
   <p mat-dialog-title>Add a Bank Account</p>
   <div mat-dialog-content [formGroup]="bankForm">
     <textarea matInput formControlName="bankinfo" rows="4" cols="50"></textarea>
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div *ngIf="data.type==paymentDialog.CARD_DIALOG">
+<div *ngIf="data.type==paymentDialogs.CARD_DIALOG">
   <p mat-dialog-title>Add a Payment Card</p>
   <div mat-dialog-content class="info" [formGroup]="cardForm">
     <input matInput formControlName="card" placeholder="{{'anms.account.dialog.card' | translate }}"/>
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div *ngIf="data.type==paymentDialog.CHANGE_DEFAULT_DIALOG">
+<div *ngIf="data.type==paymentDialogs.CHANGE_DEFAULT_DIALOG">
   <p mat-dialog-title>Select Default Payment Method</p>
   <div mat-dialog-content class="images">
       <div
