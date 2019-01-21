@@ -18,10 +18,6 @@ export interface Account {
   accountChanges: boolean;
 }
 
-export interface PaymentSetting {
-  paymentMethod: string;
-}
-
 export interface PaymentCard {
   card: string;
   cardNumber: string;
@@ -29,6 +25,10 @@ export interface PaymentCard {
   year: string;
   cvv: string;
   zipcode: string;
+}
+
+export interface PaymentBank {
+  bank: string;
 }
 
 export interface Label {
@@ -45,10 +45,16 @@ export interface AccountState {
   errors?: HttpErrorResponse[];
 }
 
+export interface PaymentState {
+  paymentMethod: string;
+  card: PaymentCard;
+  bank: PaymentBank;
+}
+
 export interface DialogParams {
   type: PaymentDialogType;
   account: Account;
-  selectedType: string;
+  selectedMethod: string;
 }
 
 export enum PaymentMethods {

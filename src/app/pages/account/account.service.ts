@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Account, Label, PaymentSetting } from './account.model';
+import { Account, Label, PaymentState } from './account.model';
 
 const PROXY_URL = './';
 
@@ -32,8 +32,6 @@ export class AccountService {
   getPaymentMethod(): Observable<string> {
     return this.httpClient
       .get(PROXY_URL + `/assets/paymentsetting.json`)
-      .pipe(
-        map((paymentSetting: PaymentSetting) => paymentSetting.paymentMethod)
-      );
+      .pipe(map((paymentState: PaymentState) => paymentState.paymentMethod));
   }
 }

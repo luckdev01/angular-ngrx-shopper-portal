@@ -125,6 +125,26 @@ export function accountReducer(
         errors: [action.payload.error]
       };
 
+    case AccountActionTypes.UPDATE_PAYMENT_CARD:
+      return {
+        ...state,
+        loading: true,
+        selectedMethod: null,
+        errors: null
+      };
+    case AccountActionTypes.UPDATE_PAYMENT_CARD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        selectedMethod: action.payload
+      };
+
+    case AccountActionTypes.UPDATE_PAYMENT_CARD_ERROR:
+      return {
+        ...state,
+        loading: false,
+        errors: [action.payload.error]
+      };
     default:
       return state;
   }

@@ -12,13 +12,12 @@ import {
   Validators
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PaymentMethods, PaymentDialogs, Account } from './../../account.model';
-
-export interface DialogData {
-  type: string;
-  account: Account;
-  selectedType: string;
-}
+import {
+  PaymentMethods,
+  PaymentDialogs,
+  DialogParams,
+  Account
+} from './../../account.model';
 
 @Component({
   selector: 'anms-dialog',
@@ -35,7 +34,7 @@ export class DialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogData
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogParams
   ) {}
 
   ngOnInit() {
@@ -48,7 +47,7 @@ export class DialogComponent implements OnInit {
       zipcode: new FormControl('', [Validators.required])
     });
     this.bankForm = this.fb.group({
-      bankinfo: new FormControl('', [Validators.required])
+      bank: new FormControl('', [Validators.required])
     });
     this.paymentMethods = PaymentMethods;
     this.paymentDialogs = PaymentDialogs;

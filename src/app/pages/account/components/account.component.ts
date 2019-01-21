@@ -13,6 +13,7 @@ import {
 } from '../account.actions';
 import {
   AccountState,
+  PaymentMethods,
   PaymentDialogs,
   PaymentDialogType,
   DialogParams
@@ -29,11 +30,13 @@ import { DialogComponent } from './dialog/dialog.component';
 export class AccountComponent implements OnInit {
   accounts$: Observable<AccountState>;
   accountsData: AccountState;
+  paymentMethods: any;
   paymentDialogs: any;
 
   constructor(public dialog: MatDialog, private store: Store<State>) {}
 
   ngOnInit() {
+    this.paymentMethods = PaymentMethods;
     this.paymentDialogs = PaymentDialogs;
 
     this.store.dispatch(new ActionAccountGetAccounts());
@@ -49,7 +52,7 @@ export class AccountComponent implements OnInit {
     const dialogParmas: DialogParams = {
       type: type,
       account: this.accountsData.accountInfos[0],
-      selectedType: this.accountsData.selectedMethod
+      selectedMethod: this.accountsData.selectedMethod
     };
     const dialogRef = this.dialog.open(DialogComponent, {
       data: dialogParmas
@@ -60,7 +63,7 @@ export class AccountComponent implements OnInit {
       if (result.type === this.paymentDialogs.CHANGE_DEFAULT_DIALOG) {
         this.store.dispatch(
           new ActionAccountUpdateSelectedPaymentMethodSuccess(
-            result.selectedType
+            result.selectedMethod
           )
         );
       }

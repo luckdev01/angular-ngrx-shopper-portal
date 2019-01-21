@@ -1,7 +1,7 @@
 <div *ngIf="dialogData.type==paymentDialogs.BANK_DIALOG">
   <p mat-dialog-title>{{'anms.account.dialog.bank.title' | translate }}</p>
   <div mat-dialog-content [formGroup]="bankForm">
-    <textarea matInput formControlName="bankinfo"></textarea>
+    <textarea matInput formControlName="bank"></textarea>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="{ type: '' }">{{'anms.common.cancel' | translate }}</button>
@@ -31,22 +31,22 @@
   <p mat-dialog-title>{{'anms.account.dialog.default.payment.title' | translate}}</p>
   <div mat-dialog-content class="images">
       <div
-      [ngClass]="{'active': dialogData.selectedType === paymentMethods.CARD}"
+      [ngClass]="{'active': dialogData.selectedMethod === paymentMethods.CARD}"
       class="card"
-      (click)="dialogData.selectedType = paymentMethods.CARD">
+      (click)="dialogData.selectedMethod = paymentMethods.CARD">
         <img src="../../../assets/visa.png" alt="{{'anms.account.dialog.alt.visa.card' | translate }}">
         <p>{{dialogData.account.paymentMethodInfo.cardInfo}}</p>
       </div>
       <div
-      [ngClass]="{'active': dialogData.selectedType === paymentMethods.BANK}"
+      [ngClass]="{'active': dialogData.selectedMethod === paymentMethods.BANK}"
       class="bank"
-      (click)="dialogData.selectedType = paymentMethods.BANK">
+      (click)="dialogData.selectedMethod = paymentMethods.BANK">
         <img src="../../../assets/bank.png" alt="{{'anms.account.dialog.alt.bank' | translate }}">
         <p>{{dialogData.account.paymentMethodInfo.bankInfo}}</p>
       </div>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="{ type: '' }">{{'anms.common.cancel' | translate }}</button>
-    <button mat-button [mat-dialog-close]="{ type: dialogData.type, selectedType: dialogData.selectedType }">{{'anms.common.ok' | translate }}</button>
+    <button mat-button [mat-dialog-close]="{ type: dialogData.type, selectedMethod: dialogData.selectedMethod }">{{'anms.common.ok' | translate }}</button>
   </div>
 </div>

@@ -18,7 +18,13 @@ export enum AccountActionTypes {
   GET_PAYMENT_METHOD_ERROR = '[Account] Get Payment Method Error',
   UPDATE_SELECTED_PAYMENT_METHOD = '[Account] Update Selected Payment Method',
   UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS = '[Account] Update Selected Payment Method Success',
-  UPDATE_SELECTED_PAYMENT_METHOD_ERROR = '[Account] Update Selected Payment Method Error'
+  UPDATE_SELECTED_PAYMENT_METHOD_ERROR = '[Account] Update Selected Payment Method Error',
+  UPDATE_PAYMENT_CARD = '[Account] Update Payment Card',
+  UPDATE_PAYMENT_CARD_SUCCESS = '[Account] Update Payment Card Success',
+  UPDATE_PAYMENT_CARD_ERROR = '[Account] Update Payment Card Error',
+  UPDATE_PAYMENT_BANK = '[Account] Update Payment Bank',
+  UPDATE_PAYMENT_BANK_SUCCESS = '[Account] Update Payment Bank Success',
+  UPDATE_PAYMENT_BANK_ERROR = '[Account] Update Payment Bank Error'
 }
 
 export class ActionAccountGetAccounts implements Action {
@@ -111,6 +117,42 @@ export class ActionAccountUpdateSelectedPaymentMethodError implements Action {
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
 
+export class ActionAccountUpdatePaymentCard implements Action {
+  readonly type = AccountActionTypes.UPDATE_PAYMENT_CARD;
+
+  constructor() {}
+}
+
+export class ActionAccountUpdatePaymentCardSuccess implements Action {
+  readonly type = AccountActionTypes.UPDATE_PAYMENT_CARD_SUCCESS;
+
+  constructor(readonly payload: string) {}
+}
+
+export class ActionAccountUpdatePaymentCardError implements Action {
+  readonly type = AccountActionTypes.UPDATE_PAYMENT_CARD_ERROR;
+
+  constructor(readonly payload: { error: HttpErrorResponse }) {}
+}
+
+export class ActionAccountUpdatePaymentBank implements Action {
+  readonly type = AccountActionTypes.UPDATE_PAYMENT_BANK;
+
+  constructor() {}
+}
+
+export class ActionAccountUpdatePaymentBankSuccess implements Action {
+  readonly type = AccountActionTypes.UPDATE_PAYMENT_BANK_SUCCESS;
+
+  constructor(readonly payload: string) {}
+}
+
+export class ActionAccountUpdatePaymentBankError implements Action {
+  readonly type = AccountActionTypes.UPDATE_PAYMENT_BANK_ERROR;
+
+  constructor(readonly payload: { error: HttpErrorResponse }) {}
+}
+
 export type AccountActions =
   | ActionAccountGetAccounts
   | ActionAccountGetAccountsSuccess
@@ -126,4 +168,10 @@ export type AccountActions =
   | ActionAccountGetPaymentMethodError
   | ActionAccountUpdateSelectedPaymentMethod
   | ActionAccountUpdateSelectedPaymentMethodSuccess
-  | ActionAccountUpdateSelectedPaymentMethodError;
+  | ActionAccountUpdateSelectedPaymentMethodError
+  | ActionAccountUpdatePaymentCard
+  | ActionAccountUpdatePaymentCardSuccess
+  | ActionAccountUpdatePaymentCardError
+  | ActionAccountUpdatePaymentBank
+  | ActionAccountUpdatePaymentBankSuccess
+  | ActionAccountUpdatePaymentBankError;

@@ -31,14 +31,14 @@
           <p name="card" class="value col-sm-4">{{accountInfo.paymentMethodInfo.cardInfo}}
             <a class="action" (click)="openDialog(paymentDialogs.CARD_DIALOG)">{{ 'anms.account.payment.add' | translate }}</a>
           </p>
-          <p *ngIf="accountsData.selectedMethod=='card'">{{ 'anms.account.payment.default' | translate }}</p>
+          <p *ngIf="accountsData.selectedMethod==paymentMethods.CARD">{{ 'anms.account.payment.default' | translate }}</p>
         </div>
         <div class="info">
           <label for="bank" class="label col-sm-2">{{ 'anms.account.payment.bank' | translate }}</label>
           <img src="assets/bank.png" alt="{{'anms.account.dialog.alt.bank' | translate }}">
           <p name="bank" class="value col-sm-4">{{accountInfo.paymentMethodInfo.bankInfo}}
             <a class="action" (click)="openDialog(paymentDialogs.BANK_DIALOG)">{{ 'anms.account.payment.add' | translate }}</a></p>
-          <p *ngIf="accountsData.selectedMethod=='bank'">{{ 'anms.account.payment.default' | translate }}</p>
+          <p *ngIf="accountsData.selectedMethod==paymentMethods.BANK">{{ 'anms.account.payment.default' | translate }}</p>
         </div>
         <div class="default">
           <p><a class="action" (click)="openDialog(paymentDialogs.CHANGE_DEFAULT_DIALOG)">{{ 'anms.account.payment.change' | translate }}</a></p>
