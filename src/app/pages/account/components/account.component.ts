@@ -68,7 +68,7 @@ export class AccountComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         type: type,
-        accounts: this.accounts,
+        account: this.accounts[0],
         selectedType: this.selectedMethod
       }
     });
@@ -77,7 +77,9 @@ export class AccountComponent implements OnInit {
       console.log(result);
       if (result.type === this.paymentDialog.CHANGE_DEFAULT_DIALOG) {
         this.store.dispatch(
-          new ActionAccountUpdateSelectedPaymentMethodSuccess(result.payload)
+          new ActionAccountUpdateSelectedPaymentMethodSuccess(
+            result.selectedType
+          )
         );
       }
     });

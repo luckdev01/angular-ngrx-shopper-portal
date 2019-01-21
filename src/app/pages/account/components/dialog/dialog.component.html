@@ -1,52 +1,52 @@
 <div *ngIf="data.type==paymentDialog.BANK_DIALOG">
   <p mat-dialog-title>Add a Bank Account</p>
-  <div mat-dialog-content>
-    <textarea rows="4" cols="50"></textarea>
+  <div mat-dialog-content [formGroup]="bankForm">
+    <textarea matInput formControlName="bankinfo" rows="4" cols="50"></textarea>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="addPaymentMethod(paymentMethods.BANK)">OK</button>
+    <button mat-button [mat-dialog-close]="{ type: '' }">Cancel</button>
+    <button mat-button [mat-dialog-close]="{ type: data.type, formdata: bankForm.value }">OK</button>
   </div>
 </div>
 
 <div *ngIf="data.type==paymentDialog.CARD_DIALOG">
   <p mat-dialog-title>Add a Payment Card</p>
-  <div mat-dialog-content class="info">
-    <input matInput name="card" placeholder="{{'anms.account.dialog.card' | translate }}"/>
-    <input matInput name="cardnumber" placeholder="{{'anms.account.dialog.cardnumber' | translate }}"/>
+  <div mat-dialog-content class="info" [formGroup]="cardForm">
+    <input matInput formControlName="card" placeholder="{{'anms.account.dialog.card' | translate }}"/>
+    <input matInput formControlName="cardnumber" placeholder="{{'anms.account.dialog.cardnumber' | translate }}"/>
     <span class="date-cvv">
-      <input matInput name="month" placeholder="{{'anms.account.dialog.month' | translate }}"/>
-      <input matInput name="year" placeholder="{{'anms.account.dialog.year' | translate }}"/>
-      <input matInput name="cvv" placeholder="{{'anms.account.dialog.cvv' | translate }}"/>
+      <input matInput formControlName="month" placeholder="{{'anms.account.dialog.month' | translate }}"/>
+      <input matInput formControlName="year" placeholder="{{'anms.account.dialog.year' | translate }}"/>
+      <input matInput formControlName="cvv" placeholder="{{'anms.account.dialog.cvv' | translate }}"/>
     </span>
-    <input matInput name="zipcode" placeholder="{{'anms.account.dialog.zipcode' | translate }}"/>
+    <input matInput formControlName="zipcode" placeholder="{{'anms.account.dialog.zipcode' | translate }}"/>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="addPaymentMethod(paymentMethods.BANK)">Add Card</button>
+    <button mat-button [mat-dialog-close]="{ type: '' }">Cancel</button>
+    <button mat-button [mat-dialog-close]="{ type: data.type, formdata: cardForm.value }">Add Card</button>
   </div>
 </div>
 
 <div *ngIf="data.type==paymentDialog.CHANGE_DEFAULT_DIALOG">
   <p mat-dialog-title>Select Default Payment Method</p>
-  <div mat-dialog-content class="images" *ngFor="let account of data.accounts">
+  <div mat-dialog-content class="images">
       <div
       [ngClass]="{'active': data.selectedType === paymentMethods.CARD}"
       class="card"
       (click)="data.selectedType = paymentMethods.CARD">
         <img src="../../../assets/visa.png" alt="Visa card">
-        <p>{{account.paymentMethodInfo.cardInfo}}</p>
+        <p>{{data.account.paymentMethodInfo.cardInfo}}</p>
       </div>
       <div
       [ngClass]="{'active': data.selectedType === paymentMethods.BANK}"
       class="bank"
       (click)="data.selectedType = paymentMethods.BANK">
         <img src="../../../assets/bank.png" alt="bank">
-        <p>{{account.paymentMethodInfo.bankInfo}}</p>
+        <p>{{data.account.paymentMethodInfo.bankInfo}}</p>
       </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="{type:data.type, payload:data.selectedType}">OK</button>
+    <button mat-button [mat-dialog-close]="{ type: '' }">Cancel</button>
+    <button mat-button [mat-dialog-close]="{ type: data.type, selectedType: data.selectedType }">OK</button>
   </div>
 </div>
