@@ -4,9 +4,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Account, Label, Notification } from './account.model';
 
 export enum AccountActionTypes {
-  GET = '[Account] Get',
-  GET_SUCCESS = '[Account] Get Success',
-  GET_ERROR = '[Account] Get Error',
+  GET_ACCOUNTS = '[Account] Get Accounts',
+  GET_ACCOUNTS_SUCCESS = '[Account] Get Accounts Success',
+  GET_ACCOUNTS_ERROR = '[Account] Get Accounts Error',
   GET_LABELS = '[Account] Get Labels',
   GET_LABELS_SUCCESS = '[Account] Get Labels Success',
   GET_LABELS_ERROR = '[Account] Get Labels Error',
@@ -21,20 +21,20 @@ export enum AccountActionTypes {
   UPDATE_SELECTED_PAYMENT_METHOD_ERROR = '[Account] Update Selected Payment Method Error'
 }
 
-export class ActionAccountGet implements Action {
-  readonly type = AccountActionTypes.GET;
+export class ActionAccountGetAccounts implements Action {
+  readonly type = AccountActionTypes.GET_ACCOUNTS;
 
   constructor() {}
 }
 
-export class ActionAccountGetSuccess implements Action {
-  readonly type = AccountActionTypes.GET_SUCCESS;
+export class ActionAccountGetAccountsSuccess implements Action {
+  readonly type = AccountActionTypes.GET_ACCOUNTS_SUCCESS;
 
   constructor(readonly payload: { accounts: Account[] }) {}
 }
 
-export class ActionAccountGetError implements Action {
-  readonly type = AccountActionTypes.GET_ERROR;
+export class ActionAccountGetAccountsError implements Action {
+  readonly type = AccountActionTypes.GET_ACCOUNTS_ERROR;
 
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
@@ -112,9 +112,9 @@ export class ActionAccountUpdateSelectedPaymentMethodError implements Action {
 }
 
 export type AccountActions =
-  | ActionAccountGet
-  | ActionAccountGetSuccess
-  | ActionAccountGetError
+  | ActionAccountGetAccounts
+  | ActionAccountGetAccountsSuccess
+  | ActionAccountGetAccountsError
   | ActionAccountGetLabels
   | ActionAccountGetLabelsSuccess
   | ActionAccountGetLabelsError

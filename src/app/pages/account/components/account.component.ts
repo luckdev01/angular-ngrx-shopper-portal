@@ -6,11 +6,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { selectAccounts } from '../account.selectors';
 import {
-  ActionAccountGet,
+  ActionAccountGetAccounts,
   ActionAccountGetLabels,
   ActionAccountGetNotifications,
-  ActionAccountUpdateSelectedPaymentMethodSuccess,
-  ActionAccountGetPaymentMethod
+  ActionAccountGetPaymentMethod,
+  ActionAccountUpdateSelectedPaymentMethodSuccess
 } from '../account.actions';
 import {
   AccountState,
@@ -46,7 +46,7 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.paymentDialogs = PaymentDialogs;
 
-    this.store.dispatch(new ActionAccountGet());
+    this.store.dispatch(new ActionAccountGetAccounts());
     this.store.dispatch(new ActionAccountGetLabels());
     this.store.dispatch(new ActionAccountGetNotifications());
     this.store.dispatch(new ActionAccountGetPaymentMethod());
@@ -57,12 +57,13 @@ export class AccountComponent implements OnInit {
         this.isLoading = true;
       } else {
         if (res.errors) this.errors = res.errors;
-        else this.accounts = res.accounts;
+        else {
+          this.accounts = res.accounts;
+          this.labels = res.labels;
+          this.notifications = res.notifications;
+          this.selectedMethod = res.selectedMethod;
+        }
       }
-
-      this.labels = res.labels;
-      this.notifications = res.notifications;
-      this.selectedMethod = res.selectedMethod;
     });
   }
 

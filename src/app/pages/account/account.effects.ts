@@ -4,10 +4,10 @@ import { Action } from '@ngrx/store';
 import { asyncScheduler, of } from 'rxjs';
 import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import {
-  ActionAccountGet,
-  ActionAccountGetSuccess,
-  ActionAccountGetError,
   AccountActionTypes,
+  ActionAccountGetAccounts,
+  ActionAccountGetAccountsSuccess,
+  ActionAccountGetAccountsError,
   ActionAccountGetLabels,
   ActionAccountGetLabelsSuccess,
   ActionAccountGetLabelsError,
@@ -29,11 +29,11 @@ export class AccountEffects {
 
   @Effect()
   getAccounts = this.actions$.pipe(
-    ofType<ActionAccountGet>(AccountActionTypes.GET),
-    switchMap((action: ActionAccountGet) =>
+    ofType<ActionAccountGetAccounts>(AccountActionTypes.GET_ACCOUNTS),
+    switchMap((action: ActionAccountGetAccounts) =>
       this.service.getAll().pipe(
-        map(accounts => new ActionAccountGetSuccess({ accounts })),
-        catchError(error => of(new ActionAccountGetError({ error })))
+        map(accounts => new ActionAccountGetAccountsSuccess({ accounts })),
+        catchError(error => of(new ActionAccountGetAccountsError({ error })))
       )
     )
   );
