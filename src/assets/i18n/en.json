@@ -110,6 +110,8 @@
   "anms.purchases.table.thirdPayment": "3rd Payment",
   "anms.purchases.table.payNow": "Pay Now",
   "anms.purchases.table.reschedule": "Reschedule",
+  "anms.purchases.table.remaining": "Pay remaining amount",
+  "anms.purchases.table.dispute": "Dispute Order",
   "anms.common.ok": "OK",
   "anms.common.cancel": "Cancel",
   "anms.common.save": "Save",

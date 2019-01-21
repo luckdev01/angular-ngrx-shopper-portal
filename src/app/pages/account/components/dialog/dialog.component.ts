@@ -35,7 +35,7 @@ export class DialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogData
   ) {}
 
   ngOnInit() {
@@ -50,7 +50,6 @@ export class DialogComponent implements OnInit {
     this.bankForm = this.fb.group({
       bankinfo: new FormControl('', [Validators.required])
     });
-    console.log(this.data);
     this.paymentMethods = PaymentMethods;
     this.paymentDialogs = PaymentDialogs;
   }

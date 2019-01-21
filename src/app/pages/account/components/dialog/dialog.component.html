@@ -1,15 +1,15 @@
-<div *ngIf="data.type==paymentDialogs.BANK_DIALOG">
+<div *ngIf="dialogData.type==paymentDialogs.BANK_DIALOG">
   <p mat-dialog-title>{{'anms.account.dialog.bank.title' | translate }}</p>
   <div mat-dialog-content [formGroup]="bankForm">
-    <textarea matInput formControlName="bankinfo" rows="4" cols="50"></textarea>
+    <textarea matInput formControlName="bankinfo"></textarea>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="{ type: '' }">{{'anms.common.cancel' | translate }}</button>
-    <button mat-button [mat-dialog-close]="{ type: data.type, formdata: bankForm.value }">{{'anms.common.ok' | translate }}</button>
+    <button mat-button [mat-dialog-close]="{ type: dialogData.type, formdata: bankForm.value }">{{'anms.common.ok' | translate }}</button>
   </div>
 </div>
 
-<div *ngIf="data.type==paymentDialogs.CARD_DIALOG">
+<div *ngIf="dialogData.type==paymentDialogs.CARD_DIALOG">
   <p mat-dialog-title>{{'anms.account.dialog.card.title' | translate }}</p>
   <div mat-dialog-content class="info" [formGroup]="cardForm">
     <input matInput formControlName="card" placeholder="{{'anms.account.dialog.card' | translate }}"/>
@@ -23,30 +23,30 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="{ type: '' }">{{'anms.common.cancel' | translate }}</button>
-    <button mat-button [mat-dialog-close]="{ type: data.type, formdata: cardForm.value }">{{'anms.account.dialog.card.add' | translate }}</button>
+    <button mat-button [mat-dialog-close]="{ type: dialogData.type, formdata: cardForm.value }">{{'anms.account.dialog.card.add' | translate }}</button>
   </div>
 </div>
 
-<div *ngIf="data.type==paymentDialogs.CHANGE_DEFAULT_DIALOG">
+<div *ngIf="dialogData.type==paymentDialogs.CHANGE_DEFAULT_DIALOG">
   <p mat-dialog-title>{{'anms.account.dialog.default.payment.title' | translate}}</p>
   <div mat-dialog-content class="images">
       <div
-      [ngClass]="{'active': data.selectedType === paymentMethods.CARD}"
+      [ngClass]="{'active': dialogData.selectedType === paymentMethods.CARD}"
       class="card"
-      (click)="data.selectedType = paymentMethods.CARD">
+      (click)="dialogData.selectedType = paymentMethods.CARD">
         <img src="../../../assets/visa.png" alt="{{'anms.account.dialog.alt.visa.card' | translate }}">
-        <p>{{data.account.paymentMethodInfo.cardInfo}}</p>
+        <p>{{dialogData.account.paymentMethodInfo.cardInfo}}</p>
       </div>
       <div
-      [ngClass]="{'active': data.selectedType === paymentMethods.BANK}"
+      [ngClass]="{'active': dialogData.selectedType === paymentMethods.BANK}"
       class="bank"
-      (click)="data.selectedType = paymentMethods.BANK">
+      (click)="dialogData.selectedType = paymentMethods.BANK">
         <img src="../../../assets/bank.png" alt="{{'anms.account.dialog.alt.bank' | translate }}">
-        <p>{{data.account.paymentMethodInfo.bankInfo}}</p>
+        <p>{{dialogData.account.paymentMethodInfo.bankInfo}}</p>
       </div>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="{ type: '' }">{{'anms.common.cancel' | translate }}</button>
-    <button mat-button [mat-dialog-close]="{ type: data.type, selectedType: data.selectedType }">{{'anms.common.ok' | translate }}</button>
+    <button mat-button [mat-dialog-close]="{ type: dialogData.type, selectedType: dialogData.selectedType }">{{'anms.common.ok' | translate }}</button>
   </div>
 </div>

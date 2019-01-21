@@ -56,7 +56,8 @@ export class PurchaseDataSource extends DataSource<any> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {
-  @Input() purchases: Purchase[];
+  @Input()
+  purchases: Purchase[];
   dataSource: PurchaseDataSource = null;
   headerItems: string[];
 
@@ -78,4 +79,8 @@ export class TableComponent implements OnInit {
   reSchedule() {
     console.log('reschedule');
   }
+
+  disputeOrder() {}
+
+  payRemaining() {}
 }
