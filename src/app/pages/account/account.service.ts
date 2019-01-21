@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Account, Label, Notification, PaymentSetting } from './account.model';
+import { Account, Label, PaymentSetting } from './account.model';
 
 const PROXY_URL = './';
 
@@ -17,16 +17,16 @@ export class AccountService {
       .pipe(map((accounts: Account[]) => accounts));
   }
 
-  getLabels(): Observable<Label[]> {
+  getPersonalInfoLabels(): Observable<Label[]> {
     return this.httpClient
-      .get(PROXY_URL + `/assets/labels.json`)
-      .pipe(map((labels: Label[]) => labels));
+      .get(PROXY_URL + `/assets/personalinfolabels.json`)
+      .pipe(map((personalInfoLabels: Label[]) => personalInfoLabels));
   }
 
-  getNotifications(): Observable<Notification[]> {
+  getNotifications(): Observable<Label[]> {
     return this.httpClient
       .get(PROXY_URL + `/assets/notifications.json`)
-      .pipe(map((notifications: Notification[]) => notifications));
+      .pipe(map((notifications: Label[]) => notifications));
   }
 
   getPaymentMethod(): Observable<string> {

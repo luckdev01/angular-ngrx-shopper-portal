@@ -4,7 +4,7 @@ import { error } from '@angular/compiler/src/util';
 
 export const initialState: AccountState = {
   loading: false,
-  accounts: [],
+  accountInfos: [],
   selectedMethod: '',
   errors: []
 };
@@ -18,7 +18,7 @@ export function accountReducer(
       return {
         ...state,
         loading: true,
-        accounts: null,
+        accountInfos: null,
         errors: null
       };
 
@@ -26,7 +26,7 @@ export function accountReducer(
       return {
         ...state,
         loading: false,
-        accounts: action.payload.accounts,
+        accountInfos: action.payload.accounts,
         errors: null
       };
 
@@ -34,29 +34,29 @@ export function accountReducer(
       return {
         ...state,
         loading: false,
-        accounts: null,
+        accountInfos: null,
         errors: [action.payload.error, ...(state.errors || [])]
       };
 
-    case AccountActionTypes.GET_LABELS:
+    case AccountActionTypes.GET_PERSONAL_INFO_LABELS:
       return {
         ...state,
         loading: true,
-        labels: null
+        personalInfoLabels: null
       };
 
-    case AccountActionTypes.GET_LABELS_SUCCESS:
+    case AccountActionTypes.GET_PERSONAL_INFO_LABELS_SUCCESS:
       return {
         ...state,
         loading: false,
-        labels: action.payload.labels
+        personalInfoLabels: action.payload.labels
       };
 
-    case AccountActionTypes.GET_LABELS_ERROR:
+    case AccountActionTypes.GET_PERSONAL_INFO_LABELS_ERROR:
       return {
         ...state,
         loading: false,
-        labels: null,
+        personalInfoLabels: null,
         errors: [action.payload.error, ...(state.errors || [])]
       };
 

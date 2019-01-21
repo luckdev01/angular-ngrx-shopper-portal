@@ -1,15 +1,15 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Account, Label, Notification } from './account.model';
+import { Account, Label } from './account.model';
 
 export enum AccountActionTypes {
   GET_ACCOUNTS = '[Account] Get Accounts',
   GET_ACCOUNTS_SUCCESS = '[Account] Get Accounts Success',
   GET_ACCOUNTS_ERROR = '[Account] Get Accounts Error',
-  GET_LABELS = '[Account] Get Labels',
-  GET_LABELS_SUCCESS = '[Account] Get Labels Success',
-  GET_LABELS_ERROR = '[Account] Get Labels Error',
+  GET_PERSONAL_INFO_LABELS = '[Account] Get Personal Info Labels',
+  GET_PERSONAL_INFO_LABELS_SUCCESS = '[Account] Get Personal Info Labels Success',
+  GET_PERSONAL_INFO_LABELS_ERROR = '[Account] Get Personal Info Labels Error',
   GET_NOTIFICATIONS = '[Account] Get Notifications',
   GET_NOTIFICATIONS_SUCCESS = '[Account] Get Notifications Success',
   GET_NOTIFICATIONS_ERROR = '[Account] Get Notifications Error',
@@ -39,20 +39,20 @@ export class ActionAccountGetAccountsError implements Action {
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
 
-export class ActionAccountGetLabels implements Action {
-  readonly type = AccountActionTypes.GET_LABELS;
+export class ActionAccountGetPersonalInfoLabels implements Action {
+  readonly type = AccountActionTypes.GET_PERSONAL_INFO_LABELS;
 
   constructor() {}
 }
 
-export class ActionAccountGetLabelsSuccess implements Action {
-  readonly type = AccountActionTypes.GET_LABELS_SUCCESS;
+export class ActionAccountGetPersonalInfoLabelsSuccess implements Action {
+  readonly type = AccountActionTypes.GET_PERSONAL_INFO_LABELS_SUCCESS;
 
   constructor(readonly payload: { labels: Label[] }) {}
 }
 
-export class ActionAccountGetLabelsError implements Action {
-  readonly type = AccountActionTypes.GET_LABELS_ERROR;
+export class ActionAccountGetPersonalInfoLabelsError implements Action {
+  readonly type = AccountActionTypes.GET_PERSONAL_INFO_LABELS_ERROR;
 
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
@@ -66,7 +66,7 @@ export class ActionAccountGetNotifications implements Action {
 export class ActionAccountGetNotificationsSuccess implements Action {
   readonly type = AccountActionTypes.GET_NOTIFICATIONS_SUCCESS;
 
-  constructor(readonly payload: { notifications: Notification[] }) {}
+  constructor(readonly payload: { notifications: Label[] }) {}
 }
 
 export class ActionAccountGetNotificationsError implements Action {
@@ -115,9 +115,9 @@ export type AccountActions =
   | ActionAccountGetAccounts
   | ActionAccountGetAccountsSuccess
   | ActionAccountGetAccountsError
-  | ActionAccountGetLabels
-  | ActionAccountGetLabelsSuccess
-  | ActionAccountGetLabelsError
+  | ActionAccountGetPersonalInfoLabels
+  | ActionAccountGetPersonalInfoLabelsSuccess
+  | ActionAccountGetPersonalInfoLabelsError
   | ActionAccountGetNotifications
   | ActionAccountGetNotificationsSuccess
   | ActionAccountGetNotificationsError

@@ -8,9 +8,9 @@ import {
   ActionAccountGetAccounts,
   ActionAccountGetAccountsSuccess,
   ActionAccountGetAccountsError,
-  ActionAccountGetLabels,
-  ActionAccountGetLabelsSuccess,
-  ActionAccountGetLabelsError,
+  ActionAccountGetPersonalInfoLabels,
+  ActionAccountGetPersonalInfoLabelsSuccess,
+  ActionAccountGetPersonalInfoLabelsError,
   ActionAccountGetNotifications,
   ActionAccountGetNotificationsSuccess,
   ActionAccountGetNotificationsError,
@@ -39,12 +39,18 @@ export class AccountEffects {
   );
 
   @Effect()
-  getLabels = this.actions$.pipe(
-    ofType<ActionAccountGetLabels>(AccountActionTypes.GET_LABELS),
+  getPersonalInfoLabels = this.actions$.pipe(
+    ofType<ActionAccountGetPersonalInfoLabels>(
+      AccountActionTypes.GET_PERSONAL_INFO_LABELS
+    ),
     switchMap(() =>
-      this.service.getLabels().pipe(
-        map(labels => new ActionAccountGetLabelsSuccess({ labels })),
-        catchError(error => of(new ActionAccountGetLabelsError({ error })))
+      this.service.getPersonalInfoLabels().pipe(
+        map(
+          labels => new ActionAccountGetPersonalInfoLabelsSuccess({ labels })
+        ),
+        catchError(error =>
+          of(new ActionAccountGetPersonalInfoLabelsError({ error }))
+        )
       )
     )
   );

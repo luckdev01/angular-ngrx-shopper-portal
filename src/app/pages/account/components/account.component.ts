@@ -2,21 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 import { selectAccounts } from '../account.selectors';
 import {
   ActionAccountGetAccounts,
-  ActionAccountGetLabels,
+  ActionAccountGetPersonalInfoLabels,
   ActionAccountGetNotifications,
   ActionAccountGetPaymentMethod,
   ActionAccountUpdateSelectedPaymentMethodSuccess
 } from '../account.actions';
 import {
   AccountState,
-  Account,
-  Label,
-  Notification,
   PaymentDialogs,
   PaymentDialogType,
   DialogParams
@@ -32,13 +28,7 @@ import { DialogComponent } from './dialog/dialog.component';
 })
 export class AccountComponent implements OnInit {
   accounts$: Observable<AccountState>;
-  isLoading: boolean;
-  errors: HttpErrorResponse[];
-  selectedMethod: string;
-
-  accounts: Account[];
-  labels: Label[];
-  notifications: Notification[];
+  accountsData: AccountState;
   paymentDialogs: any;
 
   constructor(public dialog: MatDialog, private store: Store<State>) {}
@@ -47,31 +37,19 @@ export class AccountComponent implements OnInit {
     this.paymentDialogs = PaymentDialogs;
 
     this.store.dispatch(new ActionAccountGetAccounts());
-    this.store.dispatch(new ActionAccountGetLabels());
+    this.store.dispatch(new ActionAccountGetPersonalInfoLabels());
     this.store.dispatch(new ActionAccountGetNotifications());
     this.store.dispatch(new ActionAccountGetPaymentMethod());
 
     this.accounts$ = this.store.pipe(select(selectAccounts));
-    this.accounts$.pipe().subscribe(res => {
-      if (res.loading) {
-        this.isLoading = true;
-      } else {
-        if (res.errors) this.errors = res.errors;
-        else {
-          this.accounts = res.accounts;
-          this.labels = res.labels;
-          this.notifications = res.notifications;
-          this.selectedMethod = res.selectedMethod;
-        }
-      }
-    });
+    this.accounts$.pipe().subscribe(res => (this.accountsData = res));
   }
 
   openDialog(type: PaymentDialogType): void {
     const dialogParmas: DialogParams = {
       type: type,
-      account: this.accounts[0],
-      selectedType: this.selectedMethod
+      account: this.accountsData.accountInfos[0],
+      selectedType: this.accountsData.selectedMethod
     };
     const dialogRef = this.dialog.open(DialogComponent, {
       data: dialogParmas

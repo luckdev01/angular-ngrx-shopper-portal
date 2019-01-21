@@ -36,16 +36,11 @@ export interface Label {
   value: string;
 }
 
-export interface Notification {
-  key: string;
-  value: string;
-}
-
 export interface AccountState {
   loading: boolean;
-  accounts?: Account[];
-  labels?: Label[];
-  notifications?: Notification[];
+  accountInfos?: Account[];
+  personalInfoLabels?: Label[];
+  notifications?: Label[];
   selectedMethod: string;
   errors?: HttpErrorResponse[];
 }
