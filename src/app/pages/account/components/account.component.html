@@ -1,7 +1,7 @@
 <div class="container" *ngIf="accountsData">
 
   <div *ngIf="accountsData.loading">
-    <p>Loading...</p>
+    <p>{{ 'anms.common.loading' | translate }}</p>
   </div>
 
   <div *ngFor="let error of accountsData.errors ">
@@ -18,7 +18,7 @@
         <input *ngIf="entry.isEditable" type="text" class="edit-input" [(ngModel)]="accountInfo.personalInfo[entry.key]">
         <p class="value col-sm-4">
           <a class="action" (click)="entry.isEditable = !entry.isEditable">
-            {{entry.isEditable ? "Save" : "Edit"}}</a>
+            {{(entry.isEditable ? 'anms.common.save' : 'anms.common.edit') | translate }}</a>
         </p>
       </div>
     </div>
@@ -27,7 +27,7 @@
         <h2 class="title">{{ 'anms.account.payment.method' | translate }}</h2>
         <div class="info">
           <label for="card" class="label col-sm-2">{{ 'anms.account.payment.cards' | translate }}</label>
-          <img src="assets/visa.png" alt="Visa card">
+          <img src="assets/visa.png" alt="{{'anms.account.dialog.alt.visa.card' | translate }}">
           <p name="card" class="value col-sm-4">{{accountInfo.paymentMethodInfo.cardInfo}}
             <a class="action" (click)="openDialog(paymentDialogs.CARD_DIALOG)">{{ 'anms.account.payment.add' | translate }}</a>
           </p>
@@ -35,7 +35,7 @@
         </div>
         <div class="info">
           <label for="bank" class="label col-sm-2">{{ 'anms.account.payment.bank' | translate }}</label>
-          <img src="assets/bank.png" alt="Bank">
+          <img src="assets/bank.png" alt="{{'anms.account.dialog.alt.bank' | translate }}">
           <p name="bank" class="value col-sm-4">{{accountInfo.paymentMethodInfo.bankInfo}}
             <a class="action" (click)="openDialog(paymentDialogs.BANK_DIALOG)">{{ 'anms.account.payment.add' | translate }}</a></p>
           <p *ngIf="accountsData.selectedMethod=='bank'">{{ 'anms.account.payment.default' | translate }}</p>

@@ -42,7 +42,7 @@ export class AccountComponent implements OnInit {
     this.store.dispatch(new ActionAccountGetPaymentMethod());
 
     this.accounts$ = this.store.pipe(select(selectAccounts));
-    this.accounts$.pipe().subscribe(res => (this.accountsData = res));
+    this.accounts$.pipe().subscribe(response => (this.accountsData = response));
   }
 
   openDialog(type: PaymentDialogType): void {
