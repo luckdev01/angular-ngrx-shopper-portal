@@ -17,7 +17,8 @@ import {
   Account,
   Label,
   Notification,
-  PaymentDialog
+  PaymentDialog,
+  DialogParams
 } from '../account.model';
 
 import { State } from '../../pages.state';
@@ -64,13 +65,14 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  openDialog(type: any): void {
+  openDialog(type: PaymentDialog): void {
+    const dialogParmas: DialogParams = {
+      type: type,
+      account: this.accounts[0],
+      selectedType: this.selectedMethod
+    };
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {
-        type: type,
-        account: this.accounts[0],
-        selectedType: this.selectedMethod
-      }
+      data: dialogParmas
     });
 
     dialogRef.afterClosed().subscribe(result => {

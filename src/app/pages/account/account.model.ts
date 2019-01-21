@@ -50,6 +50,12 @@ export interface AccountState {
   errors?: HttpErrorResponse[];
 }
 
+export interface DialogParams {
+  type: PaymentDialog;
+  account: Account;
+  selectedType: string;
+}
+
 export enum PaymentMethods {
   BANK = 'bank',
   CARD = 'card'
