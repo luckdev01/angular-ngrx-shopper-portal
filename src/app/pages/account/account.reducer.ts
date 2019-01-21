@@ -1,10 +1,12 @@
 import { AccountState } from './account.model';
 import { AccountActions, AccountActionTypes } from './account.actions';
+import { error } from '@angular/compiler/src/util';
 
 export const initialState: AccountState = {
   loading: false,
   accounts: [],
-  selectedMethod: ''
+  selectedMethod: '',
+  errors: []
 };
 
 export function accountReducer(
@@ -17,7 +19,7 @@ export function accountReducer(
         ...state,
         loading: true,
         accounts: null,
-        error: null
+        errors: null
       };
 
     case AccountActionTypes.GET_SUCCESS:
@@ -25,7 +27,7 @@ export function accountReducer(
         ...state,
         loading: false,
         accounts: action.payload.accounts,
-        error: null
+        errors: null
       };
 
     case AccountActionTypes.GET_ERROR:
@@ -33,7 +35,7 @@ export function accountReducer(
         ...state,
         loading: false,
         accounts: null,
-        error: action.payload.error
+        errors: [action.payload.error, ...(state.errors || [])]
       };
 
     case AccountActionTypes.GET_LABELS:
@@ -52,7 +54,7 @@ export function accountReducer(
       return {
         ...state,
         labels: null,
-        error: action.payload.error
+        errors: [action.payload.error, ...(state.errors || [])]
       };
 
     case AccountActionTypes.GET_NOTIFICATIONS:
@@ -71,7 +73,7 @@ export function accountReducer(
       return {
         ...state,
         notifications: null,
-        error: action.payload.error
+        errors: [action.payload.error, ...(state.errors || [])]
       };
 
     case AccountActionTypes.GET_PAYMENT_METHOD:
@@ -90,7 +92,7 @@ export function accountReducer(
       return {
         ...state,
         selectedMethod: null,
-        error: action.payload.error
+        errors: [action.payload.error, ...(state.errors || [])]
       };
 
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD:
@@ -107,7 +109,7 @@ export function accountReducer(
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_ERROR:
       return {
         ...state,
-        error: action.payload.error
+        errors: [action.payload.error, ...(state.errors || [])]
       };
 
     default:

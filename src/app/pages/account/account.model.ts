@@ -47,7 +47,7 @@ export interface AccountState {
   labels?: Label[];
   notifications?: Notification[];
   selectedMethod: string;
-  error?: HttpErrorResponse;
+  errors?: HttpErrorResponse[];
 }
 
 export enum PaymentMethods {

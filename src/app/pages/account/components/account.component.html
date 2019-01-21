@@ -1,4 +1,9 @@
 <div class="container">
+
+  <div *ngFor="let error of errors">
+    <mat-error>{{error.message}}</mat-error>
+  </div>
+
   <div class="accounts" *ngFor="let account of accounts">
     <div class="personal-information" >
       <h2 class="title">{{ 'anms.account.information.title' | translate }}</h2>

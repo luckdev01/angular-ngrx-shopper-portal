@@ -31,7 +31,7 @@ import { DialogComponent } from './dialog/dialog.component';
 export class AccountComponent implements OnInit {
   accounts$: Observable<AccountState>;
   isLoading: boolean;
-  errorMsg: HttpErrorResponse;
+  errors: HttpErrorResponse[];
   selectedMethod: string;
 
   accounts: Account[];
@@ -54,7 +54,7 @@ export class AccountComponent implements OnInit {
       if (res.loading) {
         this.isLoading = true;
       } else {
-        if (res.error) this.errorMsg = res.error;
+        if (res.errors) this.errors = res.errors;
         else this.accounts = res.accounts;
       }
 
