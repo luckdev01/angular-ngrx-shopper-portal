@@ -11,7 +11,7 @@ const PROXY_URL = './';
 export class AccountService {
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<Account[]> {
+  getAccountInfos(): Observable<Account[]> {
     return this.httpClient
       .get(PROXY_URL + `/assets/accounts.json`)
       .pipe(map((accounts: Account[]) => accounts));

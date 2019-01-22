@@ -5,9 +5,9 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import {
   AccountActionTypes,
-  ActionAccountGetAccounts,
-  ActionAccountGetAccountsSuccess,
-  ActionAccountGetAccountsError,
+  ActionAccountGetAccountInfos,
+  ActionAccountGetAccountInfosSuccess,
+  ActionAccountGetAccountInfosError,
   ActionAccountGetPersonalInfoLabels,
   ActionAccountGetPersonalInfoLabelsSuccess,
   ActionAccountGetPersonalInfoLabelsError,
@@ -28,12 +28,14 @@ export class AccountEffects {
   ) {}
 
   @Effect()
-  getAccounts = this.actions$.pipe(
-    ofType<ActionAccountGetAccounts>(AccountActionTypes.GET_ACCOUNTS),
-    switchMap((action: ActionAccountGetAccounts) =>
-      this.service.getAll().pipe(
-        map(accounts => new ActionAccountGetAccountsSuccess({ accounts })),
-        catchError(error => of(new ActionAccountGetAccountsError({ error })))
+  getAccountInfos = this.actions$.pipe(
+    ofType<ActionAccountGetAccountInfos>(AccountActionTypes.GET_ACCOUNT_INFOS),
+    switchMap((action: ActionAccountGetAccountInfos) =>
+      this.service.getAccountInfos().pipe(
+        map(accounts => new ActionAccountGetAccountInfosSuccess({ accounts })),
+        catchError(error =>
+          of(new ActionAccountGetAccountInfosError({ error }))
+        )
       )
     )
   );

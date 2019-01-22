@@ -10,9 +10,9 @@ import {
 } from './account.model';
 
 export enum AccountActionTypes {
-  GET_ACCOUNTS = '[Account] Get Accounts',
-  GET_ACCOUNTS_SUCCESS = '[Account] Get Accounts Success',
-  GET_ACCOUNTS_ERROR = '[Account] Get Accounts Error',
+  GET_ACCOUNT_INFOS = '[Account] Get Account Infos',
+  GET_ACCOUNT_INFOS_SUCCESS = '[Account] Get Account Infos Success',
+  GET_ACCOUNT_INFOS_ERROR = '[Account] Get Account Infos Error',
   GET_PERSONAL_INFO_LABELS = '[Account] Get Personal Info Labels',
   GET_PERSONAL_INFO_LABELS_SUCCESS = '[Account] Get Personal Info Labels Success',
   GET_PERSONAL_INFO_LABELS_ERROR = '[Account] Get Personal Info Labels Error',
@@ -33,20 +33,20 @@ export enum AccountActionTypes {
   UPDATE_PAYMENT_BANK_ERROR = '[Account] Update Payment Bank Error'
 }
 
-export class ActionAccountGetAccounts implements Action {
-  readonly type = AccountActionTypes.GET_ACCOUNTS;
+export class ActionAccountGetAccountInfos implements Action {
+  readonly type = AccountActionTypes.GET_ACCOUNT_INFOS;
 
   constructor() {}
 }
 
-export class ActionAccountGetAccountsSuccess implements Action {
-  readonly type = AccountActionTypes.GET_ACCOUNTS_SUCCESS;
+export class ActionAccountGetAccountInfosSuccess implements Action {
+  readonly type = AccountActionTypes.GET_ACCOUNT_INFOS_SUCCESS;
 
   constructor(readonly payload: { accounts: Account[] }) {}
 }
 
-export class ActionAccountGetAccountsError implements Action {
-  readonly type = AccountActionTypes.GET_ACCOUNTS_ERROR;
+export class ActionAccountGetAccountInfosError implements Action {
+  readonly type = AccountActionTypes.GET_ACCOUNT_INFOS_ERROR;
 
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
@@ -160,9 +160,9 @@ export class ActionAccountUpdatePaymentBankError implements Action {
 }
 
 export type AccountActions =
-  | ActionAccountGetAccounts
-  | ActionAccountGetAccountsSuccess
-  | ActionAccountGetAccountsError
+  | ActionAccountGetAccountInfos
+  | ActionAccountGetAccountInfosSuccess
+  | ActionAccountGetAccountInfosError
   | ActionAccountGetPersonalInfoLabels
   | ActionAccountGetPersonalInfoLabelsSuccess
   | ActionAccountGetPersonalInfoLabelsError

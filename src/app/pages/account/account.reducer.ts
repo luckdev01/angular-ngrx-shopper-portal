@@ -16,7 +16,7 @@ export function accountReducer(
   action: AccountActions
 ): AccountState {
   switch (action.type) {
-    case AccountActionTypes.GET_ACCOUNTS:
+    case AccountActionTypes.GET_ACCOUNT_INFOS:
       return {
         ...state,
         loading: true,
@@ -24,7 +24,7 @@ export function accountReducer(
         errors: null
       };
 
-    case AccountActionTypes.GET_ACCOUNTS_SUCCESS:
+    case AccountActionTypes.GET_ACCOUNT_INFOS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -32,7 +32,7 @@ export function accountReducer(
         errors: null
       };
 
-    case AccountActionTypes.GET_ACCOUNTS_ERROR:
+    case AccountActionTypes.GET_ACCOUNT_INFOS_ERROR:
       return {
         ...state,
         loading: false,

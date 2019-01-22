@@ -12,7 +12,7 @@ import {
   selectAccountStateErrors
 } from '../account.selectors';
 import {
-  ActionAccountGetAccounts,
+  ActionAccountGetAccountInfos,
   ActionAccountGetPersonalInfoLabels,
   ActionAccountGetNotificationLabels,
   ActionAccountGetPaymentInfo,
@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
     this.paymentMethods = PaymentMethods;
     this.paymentDialogs = PaymentDialogs;
 
-    this.store.dispatch(new ActionAccountGetAccounts());
+    this.store.dispatch(new ActionAccountGetAccountInfos());
     this.store.dispatch(new ActionAccountGetPaymentInfo());
     this.store.dispatch(new ActionAccountGetPersonalInfoLabels());
     this.store.dispatch(new ActionAccountGetNotificationLabels());
