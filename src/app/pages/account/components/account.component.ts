@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { selectAccounts } from '../account.selectors';
+import { selectAccountState } from '../account.selectors';
 import {
   ActionAccountGetAccounts,
   ActionAccountGetPersonalInfoLabels,
-  ActionAccountGetNotifications,
+  ActionAccountGetNotificationLabels,
   ActionAccountGetPaymentInfo,
   ActionAccountUpdateSelectedPaymentMethodSuccess,
   ActionAccountUpdatePaymentCardSuccess,
@@ -44,9 +44,9 @@ export class AccountComponent implements OnInit {
     this.store.dispatch(new ActionAccountGetAccounts());
     this.store.dispatch(new ActionAccountGetPaymentInfo());
     this.store.dispatch(new ActionAccountGetPersonalInfoLabels());
-    this.store.dispatch(new ActionAccountGetNotifications());
+    this.store.dispatch(new ActionAccountGetNotificationLabels());
 
-    this.accounts$ = this.store.pipe(select(selectAccounts));
+    this.accounts$ = this.store.pipe(select(selectAccountState));
     this.accounts$.pipe().subscribe(response => {
       this.accountsData = response;
     });

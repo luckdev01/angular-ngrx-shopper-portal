@@ -16,9 +16,9 @@ export enum AccountActionTypes {
   GET_PERSONAL_INFO_LABELS = '[Account] Get Personal Info Labels',
   GET_PERSONAL_INFO_LABELS_SUCCESS = '[Account] Get Personal Info Labels Success',
   GET_PERSONAL_INFO_LABELS_ERROR = '[Account] Get Personal Info Labels Error',
-  GET_NOTIFICATIONS = '[Account] Get Notifications',
-  GET_NOTIFICATIONS_SUCCESS = '[Account] Get Notifications Success',
-  GET_NOTIFICATIONS_ERROR = '[Account] Get Notifications Error',
+  GET_NOTIFICATION_LABELS = '[Account] Get Notification Labels',
+  GET_NOTIFICATION_LABELS_SUCCESS = '[Account] Get Notification Labels Success',
+  GET_NOTIFICATION_LABELS_ERROR = '[Account] Get Notification Labels Error',
   GET_PAYMENT_INFO = '[Account] Get Payment Info',
   GET_PAYMENT_INFO_SUCCESS = '[Account] Get Payment Info Success',
   GET_PAYMENT_INFO_ERROR = '[Account] Get Payment Info Error',
@@ -69,20 +69,20 @@ export class ActionAccountGetPersonalInfoLabelsError implements Action {
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
 
-export class ActionAccountGetNotifications implements Action {
-  readonly type = AccountActionTypes.GET_NOTIFICATIONS;
+export class ActionAccountGetNotificationLabels implements Action {
+  readonly type = AccountActionTypes.GET_NOTIFICATION_LABELS;
 
   constructor() {}
 }
 
-export class ActionAccountGetNotificationsSuccess implements Action {
-  readonly type = AccountActionTypes.GET_NOTIFICATIONS_SUCCESS;
+export class ActionAccountGetNotificationLabelsSuccess implements Action {
+  readonly type = AccountActionTypes.GET_NOTIFICATION_LABELS_SUCCESS;
 
-  constructor(readonly payload: { notifications: Label[] }) {}
+  constructor(readonly payload: { notificationLabels: Label[] }) {}
 }
 
-export class ActionAccountGetNotificationsError implements Action {
-  readonly type = AccountActionTypes.GET_NOTIFICATIONS_ERROR;
+export class ActionAccountGetNotificationLabelsError implements Action {
+  readonly type = AccountActionTypes.GET_NOTIFICATION_LABELS_ERROR;
 
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
@@ -166,9 +166,9 @@ export type AccountActions =
   | ActionAccountGetPersonalInfoLabels
   | ActionAccountGetPersonalInfoLabelsSuccess
   | ActionAccountGetPersonalInfoLabelsError
-  | ActionAccountGetNotifications
-  | ActionAccountGetNotificationsSuccess
-  | ActionAccountGetNotificationsError
+  | ActionAccountGetNotificationLabels
+  | ActionAccountGetNotificationLabelsSuccess
+  | ActionAccountGetNotificationLabelsError
   | ActionAccountGetPaymentInfo
   | ActionAccountGetPaymentInfoSuccess
   | ActionAccountGetPaymentInfoError

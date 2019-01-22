@@ -23,10 +23,10 @@ export class AccountService {
       .pipe(map((personalInfoLabels: Label[]) => personalInfoLabels));
   }
 
-  getNotifications(): Observable<Label[]> {
+  getNotificationLabels(): Observable<Label[]> {
     return this.httpClient
-      .get(PROXY_URL + `/assets/notifications.json`)
-      .pipe(map((notifications: Label[]) => notifications));
+      .get(PROXY_URL + `/assets/notificationLabels.json`)
+      .pipe(map((notificationLabels: Label[]) => notificationLabels));
   }
 
   getPaymentInfo(): Observable<PaymentState> {

@@ -50,7 +50,7 @@
         <div class="info">
           <div class="notifications">
             <mat-checkbox
-              *ngFor="let notification of accountsData.notifications"
+              *ngFor="let notification of accountsData.notificationLabels"
               class="notification col"
               [checked]="accountInfo.notificationInfo[notification.key]">{{ notification.value | translate }}
             </mat-checkbox>

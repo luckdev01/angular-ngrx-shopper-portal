@@ -60,25 +60,25 @@ export function accountReducer(
         errors: [action.payload.error, ...(state.errors || [])]
       };
 
-    case AccountActionTypes.GET_NOTIFICATIONS:
+    case AccountActionTypes.GET_NOTIFICATION_LABELS:
       return {
         ...state,
         loading: true,
-        notifications: null
+        notificationLabels: null
       };
 
-    case AccountActionTypes.GET_NOTIFICATIONS_SUCCESS:
+    case AccountActionTypes.GET_NOTIFICATION_LABELS_SUCCESS:
       return {
         ...state,
         loading: false,
-        notifications: action.payload.notifications
+        notificationLabels: action.payload.notificationLabels
       };
 
-    case AccountActionTypes.GET_NOTIFICATIONS_ERROR:
+    case AccountActionTypes.GET_NOTIFICATION_LABELS_ERROR:
       return {
         ...state,
         loading: false,
-        notifications: null,
+        notificationLabels: null,
         errors: [action.payload.error, ...(state.errors || [])]
       };
 

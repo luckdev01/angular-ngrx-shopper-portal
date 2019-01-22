@@ -40,7 +40,7 @@ export interface AccountState {
   loading: boolean;
   accountInfos?: Account[];
   personalInfoLabels?: Label[];
-  notifications?: Label[];
+  notificationLabels?: Label[];
   paymentInfo: PaymentState;
   errors?: HttpErrorResponse[];
 }
