@@ -12,10 +12,16 @@ import {
   transition,
   trigger
 } from '@angular/animations';
+import { Store, select } from '@ngrx/store';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, of } from 'rxjs';
 
 import { Purchase } from '../../purchases.model';
+import { State } from '../../../pages.state';
+import {
+  ActionPurchasePay,
+  ActionPurchaseReschedule
+} from '../../purchases.action';
 import { dataURLToBlob } from 'blob-util';
 
 export class PurchaseDataSource extends DataSource<any> {
@@ -64,7 +70,7 @@ export class TableComponent implements OnInit {
   dataSource: PurchaseDataSource = null;
   headerItems: string[];
 
-  constructor() {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.dataSource = new PurchaseDataSource(this.purchases);
@@ -76,11 +82,11 @@ export class TableComponent implements OnInit {
   };
 
   payNow() {
-    console.log('paynow');
+    this.store.dispatch(new ActionPurchasePay());
   }
 
   reSchedule() {
-    console.log('reschedule');
+    this.store.dispatch(new ActionPurchaseReschedule());
   }
 
   disputeOrder() {}

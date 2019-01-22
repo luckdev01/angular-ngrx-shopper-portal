@@ -11,7 +11,7 @@ export function purchaseReducer(
   action: PurchaseActions
 ): PurchaseState {
   switch (action.type) {
-    case PurchaseActionTypes.GET:
+    case PurchaseActionTypes.GET_PURCHASE:
       return {
         ...state,
         loading: true,
@@ -19,7 +19,7 @@ export function purchaseReducer(
         error: null
       };
 
-    case PurchaseActionTypes.GET_SUCCESS:
+    case PurchaseActionTypes.GET_PURCHASE_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -27,7 +27,7 @@ export function purchaseReducer(
         error: null
       };
 
-    case PurchaseActionTypes.GET_ERROR:
+    case PurchaseActionTypes.GET_PURCHASE_ERROR:
       return {
         ...state,
         loading: false,

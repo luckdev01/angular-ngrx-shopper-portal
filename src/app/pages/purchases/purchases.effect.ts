@@ -20,7 +20,7 @@ export class PurchaseEffects {
 
   @Effect()
   getPurchases = this.actions$.pipe(
-    ofType<ActionPurchaseGet>(PurchaseActionTypes.GET),
+    ofType<ActionPurchaseGet>(PurchaseActionTypes.GET_PURCHASE),
     switchMap((action: ActionPurchaseGet) =>
       this.service.getAll().pipe(
         map(purchases => new ActionPurchaseGetSuccess({ purchases })),
