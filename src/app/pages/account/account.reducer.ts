@@ -6,6 +6,8 @@ export const initialState: AccountState = {
   loading: false,
   accountInfos: [],
   paymentInfo: null,
+  personalInfoLabels: [],
+  notificationLabels: [],
   errors: []
 };
 

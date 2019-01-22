@@ -27,3 +27,8 @@ export const selectAccountStateNotificationLabels = createSelector(
   selectAccountState,
   (state: AccountState) => state.notificationLabels
 );
+
+export const selectAccountStateErrors = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.errors
+);

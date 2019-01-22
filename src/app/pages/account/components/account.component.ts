@@ -3,7 +3,14 @@ import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { selectAccountState } from '../account.selectors';
+import {
+  selectAccountState,
+  selectAccountStateAccountInfos,
+  selectAccountStatePaymentInfo,
+  selectAccountStatePersonalInfoLabels,
+  selectAccountStateNotificationLabels,
+  selectAccountStateErrors
+} from '../account.selectors';
 import {
   ActionAccountGetAccounts,
   ActionAccountGetPersonalInfoLabels,
@@ -15,6 +22,9 @@ import {
 } from '../account.actions';
 import {
   AccountState,
+  Account,
+  Label,
+  PaymentState,
   PaymentMethods,
   PaymentDialogs,
   PaymentDialogType,
@@ -23,6 +33,7 @@ import {
 
 import { State } from '../../pages.state';
 import { DialogComponent } from './dialog/dialog.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'anms-account',
@@ -31,7 +42,14 @@ import { DialogComponent } from './dialog/dialog.component';
 })
 export class AccountComponent implements OnInit {
   accounts$: Observable<AccountState>;
-  accountsData: AccountState;
+  accountInfos$: Observable<Account[]>;
+  paymentInfo$: Observable<PaymentState>;
+  personalInfoLabels$: Observable<Label[]>;
+  notificationLabels$: Observable<Label[]>;
+  errors$: Observable<HttpErrorResponse[]>;
+
+  accountInfos: Account[];
+  paymentInfo: PaymentState;
   paymentMethods: any;
   paymentDialogs: any;
 
@@ -47,16 +65,31 @@ export class AccountComponent implements OnInit {
     this.store.dispatch(new ActionAccountGetNotificationLabels());
 
     this.accounts$ = this.store.pipe(select(selectAccountState));
-    this.accounts$.pipe().subscribe(response => {
-      this.accountsData = response;
+    this.accountInfos$ = this.store.pipe(
+      select(selectAccountStateAccountInfos)
+    );
+    this.paymentInfo$ = this.store.pipe(select(selectAccountStatePaymentInfo));
+    this.personalInfoLabels$ = this.store.pipe(
+      select(selectAccountStatePersonalInfoLabels)
+    );
+    this.notificationLabels$ = this.store.pipe(
+      select(selectAccountStateNotificationLabels)
+    );
+    this.errors$ = this.store.pipe(select(selectAccountStateErrors));
+
+    this.accountInfos$.pipe().subscribe(response => {
+      this.accountInfos = response;
+    });
+    this.paymentInfo$.pipe().subscribe(response => {
+      this.paymentInfo = response;
     });
   }
 
   openDialog(type: PaymentDialogType): void {
     const dialogParmas: DialogParams = {
       type: type,
-      account: this.accountsData.accountInfos[0],
-      selectedMethod: this.accountsData.paymentInfo.selectedMethod
+      account: this.accountInfos[0],
+      selectedMethod: this.paymentInfo.selectedMethod
     };
     const dialogRef = this.dialog.open(DialogComponent, {
       data: dialogParmas
