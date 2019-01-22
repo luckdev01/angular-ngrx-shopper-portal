@@ -1,7 +1,13 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Account, Label } from './account.model';
+import {
+  Account,
+  Label,
+  PaymentState,
+  PaymentCard,
+  PaymentBank
+} from './account.model';
 
 export enum AccountActionTypes {
   GET_ACCOUNTS = '[Account] Get Accounts',
@@ -13,9 +19,9 @@ export enum AccountActionTypes {
   GET_NOTIFICATIONS = '[Account] Get Notifications',
   GET_NOTIFICATIONS_SUCCESS = '[Account] Get Notifications Success',
   GET_NOTIFICATIONS_ERROR = '[Account] Get Notifications Error',
-  GET_PAYMENT_METHOD = '[Account] Get Payment Method',
-  GET_PAYMENT_METHOD_SUCCESS = '[Account] Get Payment Method Success',
-  GET_PAYMENT_METHOD_ERROR = '[Account] Get Payment Method Error',
+  GET_PAYMENT_INFO = '[Account] Get Payment Info',
+  GET_PAYMENT_INFO_SUCCESS = '[Account] Get Payment Info Success',
+  GET_PAYMENT_INFO_ERROR = '[Account] Get Payment Info Error',
   UPDATE_SELECTED_PAYMENT_METHOD = '[Account] Update Selected Payment Method',
   UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS = '[Account] Update Selected Payment Method Success',
   UPDATE_SELECTED_PAYMENT_METHOD_ERROR = '[Account] Update Selected Payment Method Error',
@@ -81,20 +87,20 @@ export class ActionAccountGetNotificationsError implements Action {
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
 
-export class ActionAccountGetPaymentMethod implements Action {
-  readonly type = AccountActionTypes.GET_PAYMENT_METHOD;
+export class ActionAccountGetPaymentInfo implements Action {
+  readonly type = AccountActionTypes.GET_PAYMENT_INFO;
 
   constructor() {}
 }
 
-export class ActionAccountGetPaymentMethodSuccess implements Action {
-  readonly type = AccountActionTypes.GET_PAYMENT_METHOD_SUCCESS;
+export class ActionAccountGetPaymentInfoSuccess implements Action {
+  readonly type = AccountActionTypes.GET_PAYMENT_INFO_SUCCESS;
 
-  constructor(readonly payload: string) {}
+  constructor(readonly payload: PaymentState) {}
 }
 
-export class ActionAccountGetPaymentMethodError implements Action {
-  readonly type = AccountActionTypes.GET_PAYMENT_METHOD_ERROR;
+export class ActionAccountGetPaymentInfoError implements Action {
+  readonly type = AccountActionTypes.GET_PAYMENT_INFO_ERROR;
 
   constructor(readonly payload: { error: HttpErrorResponse }) {}
 }
@@ -126,7 +132,7 @@ export class ActionAccountUpdatePaymentCard implements Action {
 export class ActionAccountUpdatePaymentCardSuccess implements Action {
   readonly type = AccountActionTypes.UPDATE_PAYMENT_CARD_SUCCESS;
 
-  constructor(readonly payload: string) {}
+  constructor(readonly payload: PaymentCard) {}
 }
 
 export class ActionAccountUpdatePaymentCardError implements Action {
@@ -144,7 +150,7 @@ export class ActionAccountUpdatePaymentBank implements Action {
 export class ActionAccountUpdatePaymentBankSuccess implements Action {
   readonly type = AccountActionTypes.UPDATE_PAYMENT_BANK_SUCCESS;
 
-  constructor(readonly payload: string) {}
+  constructor(readonly payload: PaymentBank) {}
 }
 
 export class ActionAccountUpdatePaymentBankError implements Action {
@@ -163,9 +169,9 @@ export type AccountActions =
   | ActionAccountGetNotifications
   | ActionAccountGetNotificationsSuccess
   | ActionAccountGetNotificationsError
-  | ActionAccountGetPaymentMethod
-  | ActionAccountGetPaymentMethodSuccess
-  | ActionAccountGetPaymentMethodError
+  | ActionAccountGetPaymentInfo
+  | ActionAccountGetPaymentInfoSuccess
+  | ActionAccountGetPaymentInfoError
   | ActionAccountUpdateSelectedPaymentMethod
   | ActionAccountUpdateSelectedPaymentMethodSuccess
   | ActionAccountUpdateSelectedPaymentMethodError

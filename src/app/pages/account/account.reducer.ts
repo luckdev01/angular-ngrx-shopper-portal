@@ -1,11 +1,11 @@
-import { AccountState } from './account.model';
+import { AccountState, PaymentState } from './account.model';
 import { AccountActions, AccountActionTypes } from './account.actions';
 import { error } from '@angular/compiler/src/util';
 
 export const initialState: AccountState = {
   loading: false,
   accountInfos: [],
-  selectedMethod: '',
+  paymentInfo: null,
   errors: []
 };
 
@@ -82,25 +82,25 @@ export function accountReducer(
         errors: [action.payload.error, ...(state.errors || [])]
       };
 
-    case AccountActionTypes.GET_PAYMENT_METHOD:
+    case AccountActionTypes.GET_PAYMENT_INFO:
       return {
         ...state,
         loading: true,
-        selectedMethod: null
+        paymentInfo: null
       };
 
-    case AccountActionTypes.GET_PAYMENT_METHOD_SUCCESS:
+    case AccountActionTypes.GET_PAYMENT_INFO_SUCCESS:
       return {
         ...state,
         loading: false,
-        selectedMethod: action.payload
+        paymentInfo: action.payload
       };
 
-    case AccountActionTypes.GET_PAYMENT_METHOD_ERROR:
+    case AccountActionTypes.GET_PAYMENT_INFO_ERROR:
       return {
         ...state,
         loading: false,
-        selectedMethod: null,
+        paymentInfo: null,
         errors: [action.payload.error, ...(state.errors || [])]
       };
 
@@ -108,14 +108,13 @@ export function accountReducer(
       return {
         ...state,
         loading: true,
-        selectedMethod: null,
         errors: null
       };
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS:
       return {
         ...state,
         loading: false,
-        selectedMethod: action.payload
+        paymentInfo: { ...state.paymentInfo, selectedMethod: action.payload }
       };
 
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_ERROR:
@@ -129,17 +128,35 @@ export function accountReducer(
       return {
         ...state,
         loading: true,
-        selectedMethod: null,
         errors: null
       };
     case AccountActionTypes.UPDATE_PAYMENT_CARD_SUCCESS:
       return {
         ...state,
         loading: false,
-        selectedMethod: action.payload
+        paymentInfo: { ...state.paymentInfo, card: action.payload }
       };
 
     case AccountActionTypes.UPDATE_PAYMENT_CARD_ERROR:
+      return {
+        ...state,
+        loading: false,
+        errors: [action.payload.error]
+      };
+    case AccountActionTypes.UPDATE_PAYMENT_BANK:
+      return {
+        ...state,
+        loading: true,
+        errors: null
+      };
+    case AccountActionTypes.UPDATE_PAYMENT_BANK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        paymentInfo: { ...state.paymentInfo, bank: action.payload }
+      };
+
+    case AccountActionTypes.UPDATE_PAYMENT_BANK_ERROR:
       return {
         ...state,
         loading: false,

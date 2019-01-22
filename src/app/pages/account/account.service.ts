@@ -29,9 +29,9 @@ export class AccountService {
       .pipe(map((notifications: Label[]) => notifications));
   }
 
-  getPaymentMethod(): Observable<string> {
+  getPaymentInfo(): Observable<PaymentState> {
     return this.httpClient
       .get(PROXY_URL + `/assets/paymentsetting.json`)
-      .pipe(map((paymentState: PaymentState) => paymentState.paymentMethod));
+      .pipe(map((paymentState: PaymentState) => paymentState));
   }
 }

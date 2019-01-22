@@ -8,8 +8,10 @@ import {
   ActionAccountGetAccounts,
   ActionAccountGetPersonalInfoLabels,
   ActionAccountGetNotifications,
-  ActionAccountGetPaymentMethod,
-  ActionAccountUpdateSelectedPaymentMethodSuccess
+  ActionAccountGetPaymentInfo,
+  ActionAccountUpdateSelectedPaymentMethodSuccess,
+  ActionAccountUpdatePaymentCardSuccess,
+  ActionAccountUpdatePaymentBankSuccess
 } from '../account.actions';
 import {
   AccountState,
@@ -40,31 +42,40 @@ export class AccountComponent implements OnInit {
     this.paymentDialogs = PaymentDialogs;
 
     this.store.dispatch(new ActionAccountGetAccounts());
+    this.store.dispatch(new ActionAccountGetPaymentInfo());
     this.store.dispatch(new ActionAccountGetPersonalInfoLabels());
     this.store.dispatch(new ActionAccountGetNotifications());
-    this.store.dispatch(new ActionAccountGetPaymentMethod());
 
     this.accounts$ = this.store.pipe(select(selectAccounts));
-    this.accounts$.pipe().subscribe(response => (this.accountsData = response));
+    this.accounts$.pipe().subscribe(response => {
+      this.accountsData = response;
+    });
   }
 
   openDialog(type: PaymentDialogType): void {
     const dialogParmas: DialogParams = {
       type: type,
       account: this.accountsData.accountInfos[0],
-      selectedMethod: this.accountsData.selectedMethod
+      selectedMethod: this.accountsData.paymentInfo.selectedMethod
     };
     const dialogRef = this.dialog.open(DialogComponent, {
       data: dialogParmas
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result.type === this.paymentDialogs.CHANGE_DEFAULT_DIALOG) {
         this.store.dispatch(
           new ActionAccountUpdateSelectedPaymentMethodSuccess(
             result.selectedMethod
           )
+        );
+      } else if (result.type === this.paymentDialogs.CARD_DIALOG) {
+        this.store.dispatch(
+          new ActionAccountUpdatePaymentCardSuccess(result.formdata)
+        );
+      } else if (result.type === this.paymentDialogs.BANK_DIALOG) {
+        this.store.dispatch(
+          new ActionAccountUpdatePaymentBankSuccess(result.formdata)
         );
       }
     });

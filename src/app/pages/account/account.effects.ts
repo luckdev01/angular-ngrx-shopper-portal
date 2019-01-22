@@ -14,9 +14,9 @@ import {
   ActionAccountGetNotifications,
   ActionAccountGetNotificationsSuccess,
   ActionAccountGetNotificationsError,
-  ActionAccountGetPaymentMethod,
-  ActionAccountGetPaymentMethodSuccess,
-  ActionAccountGetPaymentMethodError
+  ActionAccountGetPaymentInfo,
+  ActionAccountGetPaymentInfoSuccess,
+  ActionAccountGetPaymentInfoError
 } from './account.actions';
 import { AccountService } from './account.service';
 
@@ -72,19 +72,12 @@ export class AccountEffects {
   );
 
   @Effect()
-  getPaymentMethod = this.actions$.pipe(
-    ofType<ActionAccountGetPaymentMethod>(
-      AccountActionTypes.GET_PAYMENT_METHOD
-    ),
+  getPaymentInfo = this.actions$.pipe(
+    ofType<ActionAccountGetPaymentInfo>(AccountActionTypes.GET_PAYMENT_INFO),
     switchMap(() =>
-      this.service.getPaymentMethod().pipe(
-        map(
-          paymentMethod =>
-            new ActionAccountGetPaymentMethodSuccess(paymentMethod)
-        ),
-        catchError(error =>
-          of(new ActionAccountGetPaymentMethodError({ error }))
-        )
+      this.service.getPaymentInfo().pipe(
+        map(paymentInfo => new ActionAccountGetPaymentInfoSuccess(paymentInfo)),
+        catchError(error => of(new ActionAccountGetPaymentInfoError({ error })))
       )
     )
   );

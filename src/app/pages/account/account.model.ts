@@ -41,12 +41,12 @@ export interface AccountState {
   accountInfos?: Account[];
   personalInfoLabels?: Label[];
   notifications?: Label[];
-  selectedMethod: string;
+  paymentInfo: PaymentState;
   errors?: HttpErrorResponse[];
 }
 
 export interface PaymentState {
-  paymentMethod: string;
+  selectedMethod: string;
   card: PaymentCard;
   bank: PaymentBank;
 }
