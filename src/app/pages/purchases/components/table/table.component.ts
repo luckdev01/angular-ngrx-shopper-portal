@@ -16,6 +16,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable, of } from 'rxjs';
 
 import { Purchase } from '../../purchases.model';
+import { dataURLToBlob } from 'blob-util';
 
 export class PurchaseDataSource extends DataSource<any> {
   data: Purchase[];
@@ -27,9 +28,11 @@ export class PurchaseDataSource extends DataSource<any> {
   connect(): Observable<Element[]> {
     const rows = [];
 
-    this.data.forEach(element => {
-      rows.push(element, { detailRow: true, element });
-    });
+    if (this.data) {
+      this.data.forEach(element => {
+        rows.push(element, { detailRow: true, element });
+      });
+    }
     return of(rows);
   }
 

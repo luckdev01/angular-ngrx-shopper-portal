@@ -1,4 +1,10 @@
 <div class="purchase-wrapper">
+  <div *ngIf="!(purchases$ | async)">
+    <p>{{ 'anms.common.loading' | translate }}</p>
+  </div>
+  <div *ngIf="(error$ | async) as error">
+    <mat-error>{{error.message}}</mat-error>
+  </div>
   <div class="filter-wrapper">
     <mat-form-field class="filter-option">
       <input matInput placeholder="{{'anms.purchases.search' | translate }}">
@@ -10,5 +16,5 @@
     </mat-form-field>
     <mat-checkbox class="filter-option">{{ 'anms.purchases.payment.reminder' | translate }}</mat-checkbox>
   </div>
-  <anms-table *ngIf="purchases" [purchases]="purchases"></anms-table>
+  <anms-table *ngIf="purchases$ | async" [purchases]="purchases$ | async"></anms-table>
 </div>
