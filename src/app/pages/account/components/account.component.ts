@@ -4,12 +4,18 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
-  selectAccountState,
-  selectAccountStateAccountInfos,
-  selectAccountStatePaymentInfo,
-  selectAccountStatePersonalInfoLabels,
-  selectAccountStateNotificationLabels,
-  selectAccountStateErrors
+  selectAccountInfos,
+  selectPaymentInfo,
+  selectPersonalInfoLabels,
+  selectNotificationLabels,
+  selectAccountInfoLoading,
+  selectPaymentInfoLoading,
+  selectPersonalInfoLabelsLoading,
+  selectNotificationLabelsLoading,
+  selectAccountInfoError,
+  selectPaymentInfoError,
+  selectPersonalInfoLabelsError,
+  selectNotificationLabelsError
 } from '../account.selectors';
 import {
   ActionAccountGetAccountInfos,
@@ -21,7 +27,6 @@ import {
   ActionAccountUpdatePaymentBankSuccess
 } from '../account.actions';
 import {
-  AccountState,
   Account,
   Label,
   PaymentState,
@@ -41,12 +46,18 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  accounts$: Observable<AccountState>;
   accountInfos$: Observable<Account[]>;
   paymentInfo$: Observable<PaymentState>;
   personalInfoLabels$: Observable<Label[]>;
   notificationLabels$: Observable<Label[]>;
-  errors$: Observable<HttpErrorResponse[]>;
+  accountInfoLoading$: Observable<boolean>;
+  personalInfoLoading$: Observable<boolean>;
+  notificationLoading$: Observable<boolean>;
+  paymentInfoLoading$: Observable<boolean>;
+  accountInfoError$: Observable<HttpErrorResponse>;
+  personalInfoError$: Observable<HttpErrorResponse>;
+  notificationError$: Observable<HttpErrorResponse>;
+  paymentInfoError$: Observable<HttpErrorResponse>;
 
   accountInfos: Account[];
   paymentInfo: PaymentState;
@@ -64,18 +75,36 @@ export class AccountComponent implements OnInit {
     this.store.dispatch(new ActionAccountGetPersonalInfoLabels());
     this.store.dispatch(new ActionAccountGetNotificationLabels());
 
-    this.accounts$ = this.store.pipe(select(selectAccountState));
-    this.accountInfos$ = this.store.pipe(
-      select(selectAccountStateAccountInfos)
-    );
-    this.paymentInfo$ = this.store.pipe(select(selectAccountStatePaymentInfo));
+    this.accountInfos$ = this.store.pipe(select(selectAccountInfos));
+    this.paymentInfo$ = this.store.pipe(select(selectPaymentInfo));
     this.personalInfoLabels$ = this.store.pipe(
-      select(selectAccountStatePersonalInfoLabels)
+      select(selectPersonalInfoLabels)
     );
     this.notificationLabels$ = this.store.pipe(
-      select(selectAccountStateNotificationLabels)
+      select(selectNotificationLabels)
     );
-    this.errors$ = this.store.pipe(select(selectAccountStateErrors));
+
+    this.accountInfoLoading$ = this.store.pipe(
+      select(selectAccountInfoLoading)
+    );
+    this.paymentInfoLoading$ = this.store.pipe(
+      select(selectPaymentInfoLoading)
+    );
+    this.personalInfoLoading$ = this.store.pipe(
+      select(selectPersonalInfoLabelsLoading)
+    );
+    this.notificationLoading$ = this.store.pipe(
+      select(selectNotificationLabelsLoading)
+    );
+
+    this.accountInfoError$ = this.store.pipe(select(selectAccountInfoError));
+    this.paymentInfoError$ = this.store.pipe(select(selectPaymentInfoError));
+    this.personalInfoError$ = this.store.pipe(
+      select(selectPersonalInfoLabelsError)
+    );
+    this.notificationError$ = this.store.pipe(
+      select(selectNotificationLabelsError)
+    );
 
     this.accountInfos$.pipe().subscribe(response => {
       this.accountInfos = response;

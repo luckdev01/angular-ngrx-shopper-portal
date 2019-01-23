@@ -1,11 +1,30 @@
 <div class="container">
 
-  <div *ngIf="!(accountInfos$ | async) || !(paymentInfo$ | async) || !(personalInfoLabels$ | async) || !(notificationLabels$ | async)">
-    <p>{{ 'anms.common.loading' | translate }}</p>
+  <div *ngIf="accountInfoLoading$ | async">
+    <p>{{ 'anms.account.loading.accountinfo' | translate }}</p>
+  </div>
+  <div *ngIf="personalInfoLoading$ | async">
+    <p>{{ 'anms.account.loading.personalinfolabels' | translate }}</p>
+  </div>
+  <div *ngIf="notificationLoading$ | async">
+    <p>{{ 'anms.account.loading.notificationlabels' | translate }}</p>
+  </div>
+  <div *ngIf="paymentInfoLoading$ | async">
+      <p>{{ 'anms.account.loading.paymentinfo' | translate }}</p>
   </div>
 
-  <div *ngFor="let error of errors$ | async ">
-    <mat-error>{{error.message}}</mat-error>
+
+  <div *ngIf="accountInfoError$ | async as error">
+    <mat-error>{{ 'anms.account.error.accountinfo' | translate }} {{error.message}}</mat-error>
+  </div>
+  <div *ngIf="personalInfoError$ | async as error">
+    <mat-error>{{ 'anms.account.error.personalinfolabels' | translate }} {{error.message}}</mat-error>
+  </div>
+  <div *ngIf="notificationError$ | async as error">
+    <mat-error>{{ 'anms.account.error.notificationlabels' | translate }} {{error.message}}</mat-error>
+  </div>
+  <div *ngIf="paymentInfoError$ | async as error">
+    <mat-error>{{ 'anms.account.error.paymentinfo' | translate }} {{error.message}}</mat-error>
   </div>
 
   <div class="accounts" *ngFor="let accountInfo of (accountInfos$ | async)" >

@@ -37,12 +37,20 @@ export interface Label {
 }
 
 export interface AccountState {
-  loading: boolean;
+  accountInfoLoading: boolean;
+  personalInfoLoading: boolean;
+  notificationLoading: boolean;
+  paymentInfoLoading: boolean;
+  paymentInfoSaving: boolean;
   accountInfos?: Account[];
   personalInfoLabels?: Label[];
   notificationLabels?: Label[];
   paymentInfo: PaymentState;
-  errors?: HttpErrorResponse[];
+  accountInfoError: HttpErrorResponse;
+  personalInfoError: HttpErrorResponse;
+  notificationError: HttpErrorResponse;
+  paymentInfoError: HttpErrorResponse;
+  paymentSaveError: HttpErrorResponse;
 }
 
 export interface PaymentState {

@@ -3,12 +3,20 @@ import { AccountActions, AccountActionTypes } from './account.actions';
 import { error } from '@angular/compiler/src/util';
 
 export const initialState: AccountState = {
-  loading: false,
+  accountInfoLoading: false,
+  personalInfoLoading: false,
+  notificationLoading: false,
+  paymentInfoLoading: false,
+  paymentInfoSaving: false,
   accountInfos: [],
   paymentInfo: null,
   personalInfoLabels: [],
   notificationLabels: [],
-  errors: []
+  accountInfoError: null,
+  personalInfoError: null,
+  notificationError: null,
+  paymentInfoError: null,
+  paymentSaveError: null
 };
 
 export function accountReducer(
@@ -19,150 +27,162 @@ export function accountReducer(
     case AccountActionTypes.GET_ACCOUNT_INFOS:
       return {
         ...state,
-        loading: true,
+        accountInfoLoading: true,
         accountInfos: null,
-        errors: null
+        accountInfoError: null
       };
 
     case AccountActionTypes.GET_ACCOUNT_INFOS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        accountInfoLoading: false,
         accountInfos: action.payload.accounts,
-        errors: null
+        accountInfoError: null
       };
 
     case AccountActionTypes.GET_ACCOUNT_INFOS_ERROR:
       return {
         ...state,
-        loading: false,
+        accountInfoLoading: false,
         accountInfos: null,
-        errors: [action.payload.error, ...(state.errors || [])]
+        accountInfoError: action.payload.error
       };
 
     case AccountActionTypes.GET_PERSONAL_INFO_LABELS:
       return {
         ...state,
-        loading: true,
-        personalInfoLabels: null
+        personalInfoLoading: true,
+        personalInfoLabels: null,
+        personalInfoError: null
       };
 
     case AccountActionTypes.GET_PERSONAL_INFO_LABELS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        personalInfoLabels: action.payload.labels
+        personalInfoLoading: false,
+        personalInfoLabels: action.payload.labels,
+        personalInfoError: null
       };
 
     case AccountActionTypes.GET_PERSONAL_INFO_LABELS_ERROR:
       return {
         ...state,
-        loading: false,
+        personalInfoLoading: false,
         personalInfoLabels: null,
-        errors: [action.payload.error, ...(state.errors || [])]
+        personalInfoError: action.payload.error
       };
 
     case AccountActionTypes.GET_NOTIFICATION_LABELS:
       return {
         ...state,
-        loading: true,
-        notificationLabels: null
+        notificationLoading: true,
+        notificationLabels: null,
+        notificationError: null
       };
 
     case AccountActionTypes.GET_NOTIFICATION_LABELS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        notificationLabels: action.payload.notificationLabels
+        notificationLoading: false,
+        notificationLabels: action.payload.notificationLabels,
+        notificationError: null
       };
 
     case AccountActionTypes.GET_NOTIFICATION_LABELS_ERROR:
       return {
         ...state,
-        loading: false,
+        notificationLoading: false,
         notificationLabels: null,
-        errors: [action.payload.error, ...(state.errors || [])]
+        notificationError: action.payload.error
       };
 
     case AccountActionTypes.GET_PAYMENT_INFO:
       return {
         ...state,
-        loading: true,
-        paymentInfo: null
+        paymentInfoLoading: true,
+        paymentInfo: null,
+        paymentInfoError: null
       };
 
     case AccountActionTypes.GET_PAYMENT_INFO_SUCCESS:
       return {
         ...state,
-        loading: false,
-        paymentInfo: action.payload
+        paymentInfoLoading: false,
+        paymentInfo: action.payload,
+        paymentInfoError: null
       };
 
     case AccountActionTypes.GET_PAYMENT_INFO_ERROR:
       return {
         ...state,
-        loading: false,
+        paymentInfoLoading: false,
         paymentInfo: null,
-        errors: [action.payload.error, ...(state.errors || [])]
+        paymentInfoError: action.payload.error
       };
 
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD:
       return {
         ...state,
-        loading: true,
-        errors: null
+        paymentInfoSaving: true,
+        paymentSaveError: null
       };
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_SUCCESS:
       return {
         ...state,
-        loading: false,
-        paymentInfo: { ...state.paymentInfo, selectedMethod: action.payload }
+        paymentInfoSaving: false,
+        paymentInfo: { ...state.paymentInfo, selectedMethod: action.payload },
+        paymentSaveError: null
       };
 
     case AccountActionTypes.UPDATE_SELECTED_PAYMENT_METHOD_ERROR:
       return {
         ...state,
-        loading: false,
-        errors: [action.payload.error]
+        paymentInfoSaving: false,
+        paymentInfo: { ...state.paymentInfo, selectedMethod: '' },
+        paymentSaveError: action.payload.error
       };
 
     case AccountActionTypes.UPDATE_PAYMENT_CARD:
       return {
         ...state,
-        loading: true,
-        errors: null
+        paymentInfoSaving: true,
+        paymentSaveError: null
       };
     case AccountActionTypes.UPDATE_PAYMENT_CARD_SUCCESS:
       return {
         ...state,
-        loading: false,
-        paymentInfo: { ...state.paymentInfo, card: action.payload }
+        paymentInfoSaving: false,
+        paymentInfo: { ...state.paymentInfo, card: action.payload },
+        paymentSaveError: null
       };
 
     case AccountActionTypes.UPDATE_PAYMENT_CARD_ERROR:
       return {
         ...state,
-        loading: false,
-        errors: [action.payload.error]
+        paymentInfoSaving: false,
+        paymentInfo: { ...state.paymentInfo, card: null },
+        paymentSaveError: action.payload.error
       };
     case AccountActionTypes.UPDATE_PAYMENT_BANK:
       return {
         ...state,
-        loading: true,
-        errors: null
+        paymentInfoSaving: true,
+        paymentSaveError: null
       };
     case AccountActionTypes.UPDATE_PAYMENT_BANK_SUCCESS:
       return {
         ...state,
-        loading: false,
-        paymentInfo: { ...state.paymentInfo, bank: action.payload }
+        paymentInfoSaving: false,
+        paymentInfo: { ...state.paymentInfo, bank: action.payload },
+        paymentSaveError: null
       };
 
     case AccountActionTypes.UPDATE_PAYMENT_BANK_ERROR:
       return {
         ...state,
-        loading: false,
-        errors: [action.payload.error]
+        paymentInfoSaving: false,
+        paymentInfo: { ...state.paymentInfo, bank: null },
+        paymentSaveError: action.payload.error
       };
     default:
       return state;

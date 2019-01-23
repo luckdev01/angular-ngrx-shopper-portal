@@ -8,27 +8,62 @@ export const selectAccountState = createSelector(
   (state: PagesState) => state.accounts
 );
 
-export const selectAccountStateAccountInfos = createSelector(
+export const selectAccountInfoLoading = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.accountInfoLoading
+);
+
+export const selectAccountInfos = createSelector(
   selectAccountState,
   (state: AccountState) => state.accountInfos
 );
 
-export const selectAccountStatePaymentInfo = createSelector(
+export const selectAccountInfoError = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.accountInfoError
+);
+
+export const selectPaymentInfoLoading = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.paymentInfoLoading
+);
+
+export const selectPaymentInfo = createSelector(
   selectAccountState,
   (state: AccountState) => state.paymentInfo
 );
 
-export const selectAccountStatePersonalInfoLabels = createSelector(
+export const selectPaymentInfoError = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.paymentInfoError
+);
+
+export const selectPersonalInfoLabelsLoading = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.personalInfoLoading
+);
+
+export const selectPersonalInfoLabels = createSelector(
   selectAccountState,
   (state: AccountState) => state.personalInfoLabels
 );
 
-export const selectAccountStateNotificationLabels = createSelector(
+export const selectPersonalInfoLabelsError = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.personalInfoError
+);
+
+export const selectNotificationLabelsLoading = createSelector(
+  selectAccountState,
+  (state: AccountState) => state.notificationLoading
+);
+
+export const selectNotificationLabels = createSelector(
   selectAccountState,
   (state: AccountState) => state.notificationLabels
 );
 
-export const selectAccountStateErrors = createSelector(
+export const selectNotificationLabelsError = createSelector(
   selectAccountState,
-  (state: AccountState) => state.errors
+  (state: AccountState) => state.notificationError
 );
